@@ -3,11 +3,13 @@
   padding: 0%;
   box-sizing: border-box;
 }
+
 html,
 body {
   width: 100%;
   height: 100%;
 }
+
 @import "tailwindcss";
 
 .active {
@@ -15,56 +17,112 @@ body {
   animation: alternate infinite 5s bgChange;
   object-fit: cover;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 3px rgb(0, 174, 255);
   padding-inline: 10px;
-
   text-align: center;
   background:
     linear-gradient(black) padding-box,
-    conic-gradient(from var(--rotate), black, red, black, red,black) border-box;
+    conic-gradient(from var(--rotate), black, red, black, red, black) border-box;
   border-radius: 10px;
   color: white;
   border: 1px rgb(256, 256, 256, 0) solid;
   animation: forwards changeThePaddingBox 10s;
 }
+
 @property --rotate {
   syntax: "<angle>";
   inherits: false;
   initial-value: 90deg;
 }
+
 @keyframes changeThePaddingBox {
   from {
     --rotate: 0deg;
   }
+
   to {
     --rotate: 360deg;
   }
 }
-.navbar{
+
+.navbar {
   display: flex;
   flex-direction: row;
   width: 100vw;
   justify-content: space-evenly;
   text-align: center;
   align-items: center;
-  position:sticky ;
+  position: sticky;
   background-color: #000;
   opacity: 0.95;
   color: white;
-
 }
-.navbar img{
+
+.navbar img {
   height: 40px;
   animation: none;
 }
-.login{
+
+.login {
   background: skyblue;
-  border: 0.5px white ;
+  border: 0.5px white;
   border-radius: 10px;
   padding-inline: 10px;
   padding: 2px;
   width: 60px;
+}
+
+.backbutton {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  gap: 2vh;
+  position: sticky;
+  background-color: #000;
+  opacity: 0.95;
+  color: white;
+}
+
+.backbutton button {
+  width: 100px;
+  display: flex;
+  height: 4vh;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+.main-input {
+  height: fit-content;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  display: flex;
+  margin-top: 20vh;
+  flex-direction: column;
+  z-index: 2;
+}
+form button{
+  height: 5vh;
+  width:43vW;
+  color: white;
+}
+form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logIn-input{
+  height: 8vh;
+  border: coral solid 1px;
+  background: transparent;
+  width: 43vw;
+  text-align: center;
+  margin: 1vh;
+  border-radius: 10px;
 }

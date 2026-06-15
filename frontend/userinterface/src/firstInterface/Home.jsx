@@ -5,8 +5,7 @@ import ProductGrid from './components/ProductGrid';
 export default function HomePage() {
   return (
     <div className="bg-black min-h-screen">
-      <Navbar />
-      <Hero />
+      <Hero/>
       <ProductGrid />
     </div>
   );

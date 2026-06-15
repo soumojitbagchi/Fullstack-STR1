@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import "./Container.css"; // Assuming you have some CSS
+import aboutUs from "./aboutUs";
+import "./Container.css"
 
 const Navbar = () => {
   return (
@@ -25,7 +26,7 @@ const Navbar = () => {
         </NavLink>
 
         <NavLink
-          to="/about"
+          to="/aboutUs"
           className={({ isActive }) =>
             isActive ? "nav-link active" : "nav-link"
           }
