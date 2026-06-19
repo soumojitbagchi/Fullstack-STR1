@@ -3,19 +3,16 @@ import { motion } from "framer-motion";
 
 const contactInfo = [
   {
-    icon: "📧",
     title: "Email Us",
     detail: "support@shopwave.com",
     sub: "We reply within 24 hours",
   },
   {
-    icon: "📞",
     title: "Call Us",
     detail: "+91 (555) 123-4567",
     sub: "Mon–Fri, 9 AM – 6 PM",
   },
   {
-    icon: "📍",
     title: "Visit Us",
     detail: "Barasat, WB 700124",
     sub: "Walk-ins welcome",
@@ -69,10 +66,7 @@ const Contact = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
-      >
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-amber-300 via-yellow-200 to-orange-400 bg-clip-text text-transparent">
-          Get In Touch
-        </h1>
+      >x
         <p className="text-gray-400 text-lg max-w-xl mx-auto">
           Have a question or just want to say hello? We'd love to hear from you.
         </p>
@@ -115,19 +109,18 @@ const Contact = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="mb-6 p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-center"
           >
-            ✅ Message sent successfully! We'll get back to you soon.
           </motion.div>
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-          <div className="flex flex-col md:flex-row gap-5">
+          <div className="flex flex-col  gap-5">
             <input
               type="text"
               name="name"
               placeholder="Your Name"
               value={form.name}
               onChange={handleChange}
-              className="flex-1 bg-gray-900 border border-gray-800 rounded-xl px-5 py-4 text-white placeholder-gray-500 outline-none focus:border-amber-500 transition-colors"
+              className="flex-1 bg-gray-900 border border-gray-800 rounded-xl pt-3 px-5 py-4 text-white placeholder-gray-500 outline-none focus:border-amber-500 transition-colors"
             />
             <input
               type="email"
