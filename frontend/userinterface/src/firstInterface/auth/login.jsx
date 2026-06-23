@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import ThreeBackground from "./components/ThreeBackground";
+import ThreeBackground from "../background/ThreeBackground";
 import { motion } from "framer-motion";
-import "./Container.css";
+import "../Container.css";
 import axios from "axios";
 import { VscEyeClosed } from "react-icons/vsc";
 import { VscEye } from "react-icons/vsc";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const login = () => {
   const [email, setEmail] = useState("");
@@ -27,7 +27,7 @@ const login = () => {
         { email, password },
       );
       authLogin(response.data.token);  // saves to localStorage + updates context
-      navigate("/");                    // redirect to home
+      navigate("/dashboard");
     } catch (error) {
       console.log(error);
     }

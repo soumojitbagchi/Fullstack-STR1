@@ -1,14 +1,14 @@
 import React from "react";
-import BackButton from "./BackButton";
-import SignupThreeBackground from "./components/SignupThreeBackground";
+import BackButton from "../components/BackButton";
+import SignupThreeBackground from "../background/SignupThreeBackground";
 import { motion } from "framer-motion";
-import "./Container.css";
+import "../Container.css";
 import { VscEyeClosed } from "react-icons/vsc";
 import { VscEye } from "react-icons/vsc";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "./context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 const signup = () => {
   const [email, setEmail] = useState("");
@@ -24,7 +24,7 @@ const signup = () => {
         {user,email,password}
       )
       authLogin(response.data.token);  // saves to localStorage + updates context
-      navigate("/");                     // redirect to home
+      navigate("/dashboard");
     } catch (error) {
       console.log(error)
     }

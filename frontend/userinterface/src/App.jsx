@@ -1,13 +1,16 @@
 import React from 'react'
-import Home from './firstInterface/Home'
+import Home from './firstInterface/pages/Home'
 import { NavLink } from 'react-router-dom'
 import { Routes,Route } from 'react-router-dom'
-import Navbar from './firstInterface/navbar'
-import BackButton from './firstInterface/BackButton'
-import Login from './firstInterface/login'
-import Signup from './firstInterface/signup'
-import AboutUs from './firstInterface/aboutUs'
-import Contact from './firstInterface/Contact'
+import Navbar from './firstInterface/components/navbar'
+import BackButton from './firstInterface/components/BackButton'
+import Login from './firstInterface/auth/login'
+import Signup from './firstInterface/auth/signup'
+import AboutUs from './firstInterface/pages/aboutUs'
+import Contact from './firstInterface/pages/Contact'
+import Dashboard from './firstInterface/pages/Dashboard'
+import ProtectedRoute from './firstInterface/components/ProtectedRoute'
+
 const App = () => {
   return (
     <div>
@@ -17,6 +20,13 @@ const App = () => {
         <Route path="/contact" element={<div><Navbar/><Contact /> </div>} />
         <Route path="/login" element={<div><BackButton/><Login /></div>} />
         <Route path="/signup" element={<Signup />} />
+
+        {/* Protected: only accessible when logged in */}
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
       </Routes>
     </div>
   )

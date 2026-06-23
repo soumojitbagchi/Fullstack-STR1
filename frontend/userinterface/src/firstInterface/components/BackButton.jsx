@@ -1,7 +1,7 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
-import "./Container.css";
+import "../Container.css";
 import { motion, scale } from "framer-motion";
 import { NavLink } from "react-router-dom";
 
