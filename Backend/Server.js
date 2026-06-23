@@ -4,5 +4,5 @@ const port =8080
 const connectToDB = require("./src/config/database");
 connectToDB();
 app.listen(port, () => {
-  console.log("connect to 8080");
+  console.log("connect to 8080"); 
 });
