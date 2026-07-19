@@ -10,6 +10,7 @@ import AboutUs from './firstInterface/pages/aboutUs'
 import Contact from './firstInterface/pages/Contact'
 import Dashboard from './firstInterface/pages/Dashboard'
 import ProtectedRoute from './firstInterface/components/ProtectedRoute'
+import OutsideDashBoard from './firstInterface/onClickingOutside/pages/OutsideDashBoard'
 
 const App = () => {
   return (
@@ -20,13 +21,12 @@ const App = () => {
         <Route path="/contact" element={<div><Navbar/><Contact /> </div>} />
         <Route path="/login" element={<div><BackButton/><Login /></div>} />
         <Route path="/signup" element={<Signup />} />
-
-        {/* Protected: only accessible when logged in */}
         <Route path="/dashboard" element={
           <ProtectedRoute>
             <Dashboard />
           </ProtectedRoute>
         } />
+        <Route path='/outside' element={<OutsideDashBoard/>} />
       </Routes>
     </div>
   )

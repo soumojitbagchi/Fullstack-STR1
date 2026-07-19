@@ -64,7 +64,7 @@ const login = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="enter password"
             ></input>
-            <motion.button onClick={previewChanger} className=" text-3xl">
+            <motion.button onClick={previewChanger} type="button" className=" text-3xl">
               {showPassword ? <VscEye /> : <VscEyeClosed />}
             </motion.button>
           </div>
@@ -74,6 +74,7 @@ const login = () => {
           className="active"
           whileTap={{ scale: 0.9 }}
           whileHover={{ backgroundColor: "green" }}
+          type="submit"
         >
           LogIn
         </motion.button>

@@ -36,18 +36,25 @@
   color: #888;
 }
 
-.dashboard-logout {
+.dashboard-outside {
   background: none;
-  border: 1px solid #444;
   color: #ccc;
-  padding: 8px 20px;
-  border-radius: 6px;
+  position: absolute;
+  left: 95%;
+  min-height: 25px;
+  min-width: 25px;
+  border-radius: 50%;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.2s;
 }
+.dashboard-outside img{
+  height: 25px;
+  width: 25px;
+  object-fit: cover;
+}
 
-.dashboard-logout:hover {
+.dashboard-outside:hover {
   border-color: #e53e3e;
   color: #e53e3e;
 }

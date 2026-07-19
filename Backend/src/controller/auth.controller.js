@@ -48,4 +48,5 @@ const loginController = async (req, res) => {
   res.status(201).json({ message: "Login successful", token });
 }
 
+
 module.exports = {registerController,loginController}

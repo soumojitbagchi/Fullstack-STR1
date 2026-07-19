@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { fetchAllProducts, fetchCategories, fetchProductsByCategory } from '../services/productApi';
 import './Dashboard.css';
+import OutsideDashBoard from '../onClickingOutside/pages/OutsideDashBoard';
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -12,6 +13,10 @@ export default function Dashboard() {
   const [activeCategory, setActiveCategory] = useState('all');
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState({});
+
+  const outsidedashboard = ()=>{
+    navigate('/outside')
+  }
 
   useEffect(() => {
     fetchCategories()
@@ -53,9 +58,11 @@ export default function Dashboard() {
           <h1 className="dashboard-title">Products</h1>
           <span className="dashboard-welcome">Welcome, {user?.name}</span>
         </div>
-        <button className="dashboard-logout" onClick={() => { logout(); navigate('/login'); }}>
-          Logout
-        </button>
+        <div className="dashboard-outside" onClick={()=>{
+          outsidedashboard()
+        }}>
+          dj
+        </div>
       </header>
 
       <div className="dashboard-filters">
