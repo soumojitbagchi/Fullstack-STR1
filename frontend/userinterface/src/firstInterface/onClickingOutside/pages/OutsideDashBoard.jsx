@@ -2,7 +2,7 @@ import React from 'react'
 import { useAuthActions } from '../../../hooks/useAuth'
 
 const OutsideDashBoard = () => {
-  const {user,handleLogout}= useAuthActions()
+  const {handleLogout}= useAuthActions()
   const logout=()=>{
           handleLogout()
         }
