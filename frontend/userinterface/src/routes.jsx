@@ -11,6 +11,7 @@ import Contact from "./firstInterface/pages/Contact";
 import Dashboard from "./firstInterface/pages/Dashboard";
 import ProtectedRoute from "./firstInterface/components/ProtectedRoute";
 import OutsideDashBoard from "./firstInterface/onClickingOutside/pages/OutsideDashBoard";
+import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.context";
 
 const AppRoutes = () => {
   return (
@@ -59,7 +60,7 @@ const AppRoutes = () => {
           </ProtectedRoute>
         }
       />
-      <Route path="/outside" element={<OutsideDashBoard />} />
+      <Route path="/outside" element={<DashboardProvider><OutsideDashBoard /></DashboardProvider>} />
     </Routes>
   );
 };

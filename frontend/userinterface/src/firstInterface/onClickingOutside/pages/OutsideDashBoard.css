@@ -1,0 +1,378 @@
+.dashboard-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 340px;
+  height: 100vh;
+  z-index: 1000;
+
+  /* Glassmorphism panel */
+  background: rgba(15, 15, 25, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    -8px 0 40px rgba(0, 0, 0, 0.55),
+    inset 1px 0 0 rgba(255, 255, 255, 0.04);
+
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  /* Slide-in animation */
+  transform: translateX(0%);
+  opacity: 1;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
+}
+
+/* Subtle top gradient accent */
+.dashboard-menu::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    #6366f1 0%,
+    #a855f7 40%,
+    #ec4899 100%
+  );
+  border-radius: 0 0 4px 4px;
+  z-index: 2;
+}
+
+/* ---- Open / Close state toggle ---- */
+.dashboard-menu.close {
+  transform: translateX(110%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dashboard-menu.open {
+  transform: translateX(0%);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---------- Close / Toggle Button ---------- */
+.function-button {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  z-index: 3;
+}
+
+.function-button img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.function-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.25);
+  transform: scale(1.08);
+}
+
+.function-button:hover img {
+  transform: rotate(90deg);
+}
+
+.function-button:active {
+  transform: scale(0.94);
+}
+
+/* Visually-hidden when "open" state class is on button itself */
+.function-button.open {
+  opacity: 1;
+}
+
+.function-button.close {
+  opacity: 0.5;
+}
+
+/* ---------- Profile Section ---------- */
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 52px 28px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+/* Soft glow behind avatar */
+.profile-image::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(99, 102, 241, 0.25) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.profile-image img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.35);
+}
+
+.profile-image h1 {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f1f1f4;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+  position: relative;
+  z-index: 1;
+}
+
+/* ---------- Options / Menu Items ---------- */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 22px 20px;
+  flex: 1;
+}
+
+/* Shared style for all option items */
+.options > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.78);
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+  text-transform: capitalize;
+}
+
+/* Hover shimmer effect */
+.options > div::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.04) 0%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.options > div:hover::before {
+  opacity: 1;
+}
+
+.options > div:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  transform: translateX(4px);
+  box-shadow: 0 2px 16px rgba(99, 102, 241, 0.08);
+}
+
+.options > div:active {
+  transform: translateX(2px) scale(0.98);
+}
+
+/* ---- Individual item accent colors ---- */
+
+/* Edit Profile — Indigo */
+.edit-profile::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #6366f1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.edit-profile:hover::after {
+  opacity: 1;
+}
+
+/* Orders — Amber */
+.orders::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #f59e0b;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.orders:hover::after {
+  opacity: 1;
+}
+
+/* Cart — Emerald */
+.cart::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #10b981;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cart:hover::after {
+  opacity: 1;
+}
+
+/* Wishlist — Rose */
+.wishlist::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #f43f5e;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.wishlist:hover::after {
+  opacity: 1;
+}
+
+/* Logout — distinct danger style */
+.logout {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 18px !important;
+}
+
+.logout::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 20%;
+  height: 60%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #ef4444;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.logout:hover {
+  background: rgba(239, 68, 68, 0.08) !important;
+  color: #fca5a5 !important;
+}
+
+.logout:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Backdrop overlay (optional — add in JSX) ---------- */
+.dashboard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 1;
+  transition: opacity 0.35s ease;
+}
+
+.dashboard-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ---------- Scrollbar ---------- */
+.dashboard-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dashboard-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.dashboard-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 480px) {
+  .dashboard-menu {
+    width: 100vw;
+    border-left: none;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .dashboard-menu {
+    width: 300px;
+  }
+}

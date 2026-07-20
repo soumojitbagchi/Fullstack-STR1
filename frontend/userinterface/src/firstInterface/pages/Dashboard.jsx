@@ -61,7 +61,7 @@ export default function Dashboard() {
         <div className="dashboard-outside" onClick={()=>{
           outsidedashboard()
         }}>
-          dj
+          <img src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA" alt="" />
         </div>
       </header>
 

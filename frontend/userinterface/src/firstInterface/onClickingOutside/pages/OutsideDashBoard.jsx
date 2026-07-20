@@ -1,28 +1,73 @@
 import React from 'react'
 import { useAuthActions } from '../../../hooks/useAuth'
+import { useAuth } from '../hooks/useDashboard'
+import './OutsideDashBoard.css'
 
 const OutsideDashBoard = () => {
-  const {handleLogout}= useAuthActions()
-  const logout=()=>{
-          handleLogout()
-        }
+  const { handleLogout } = useAuthActions()
+  const logout = () => {
+    handleLogout()
+  }
+  const { open, setOpen } = useAuth()
+  const changeOpen = () => {
+    setOpen(!open)
+  }
+
   return (
-    <div className='dashboard-menu'>
-      .
-      <div className="profile-image">
-        <img src="https://www.startpage.com/av/proxy-image?piurl=https%3A%2F%2Fi.pinimg.com%2Foriginals%2F54%2F72%2Fd1%2F5472d1b09d3d724228109d381d617326.jpg&sp=1784362005T72e04c5e34e838036b5ba980167d796859e748ee885ca236065d4b4186defbdd" alt="" />
-        <h1>name of user </h1>
-      </div>
-      <div className="options">
-        <div className="edit-profile">edit menu</div>
-        <div className="orders">orders</div>
-        <div className="cart">cart</div>
-        <div className="wishlist">wishlist</div>
-        <div className="logout" onClick={()=>logout()}>logout</div>
+    <>
+      {/* Backdrop overlay — closes sidebar on click */}
+      <div
+        className={`dashboard-overlay ${!open ? 'hidden' : ''}`}
+        onClick={changeOpen}
+      />
 
-      </div>
+      {/* Sidebar drawer */}
+      <div className={`dashboard-menu ${open ? 'open' : 'close'}`}>
+        {/* Close button */}
+        <button
+          onClick={changeOpen}
+          className={`function-button ${open ? 'open' : 'close'}`}
+        >
+          <img
+            src="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/icons/System/close-fill.svg"
+            alt="close"
+          />
+        </button>
 
-    </div>
+        {/* Profile section */}
+        <div className="profile-image">
+          <img
+            src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA"
+            alt="profile"
+          />
+          <h1>name of user</h1>
+        </div>
+
+        {/* Menu options */}
+        <div className="options">
+          <div className="edit-profile">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Edit Profile
+          </div>
+          <div className="orders">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Orders
+          </div>
+          <div className="cart">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Cart
+          </div>
+          <div className="wishlist">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            Wishlist
+          </div>
+          <div className="logout" onClick={() => logout()}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Logout
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
 
