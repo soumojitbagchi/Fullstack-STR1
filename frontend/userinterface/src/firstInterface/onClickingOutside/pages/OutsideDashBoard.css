@@ -1,200 +1,199 @@
-/* ============================================
-   Profile Trigger Button (in Navbar)
-   ============================================ */
-.profile-trigger-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.profile-trigger {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid rgba(168, 85, 247, 0.5);
-  background: transparent;
-  cursor: pointer;
-  padding: 0;
-  overflow: hidden;
-  transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.2s ease;
-}
-
-.profile-trigger:hover {
-  border-color: rgba(168, 85, 247, 0.8);
-  box-shadow: 0 0 16px rgba(168, 85, 247, 0.3);
-  transform: scale(1.08);
-}
-
-.profile-trigger:active {
-  transform: scale(0.95);
-}
-
-.profile-trigger-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
-/* ============================================
-   Floating Dropdown Menu
-   ============================================ */
-.profile-dropdown {
-  position: absolute;
-  top: calc(100% + 12px);
+.dashboard-menu {
+  position: fixed;
+  top: 0;
   right: 0;
-  width: 280px;
+  width: 340px;
+  height: 100vh;
   z-index: 1000;
 
   /* Glassmorphism panel */
-  background: rgba(15, 15, 25, 0.95);
+  background: rgba(15, 15, 25, 0.92);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
-    0 12px 48px rgba(0, 0, 0, 0.5),
-    0 4px 16px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    -8px 0 40px rgba(0, 0, 0, 0.55),
+    inset 1px 0 0 rgba(255, 255, 255, 0.04);
 
+  display: flex;
+  flex-direction: column;
   padding: 0;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 
-  /* Animation */
+  /* Slide-in animation */
+  transform: translateX(0%);
   opacity: 1;
-  transform: translateY(0) scale(1);
-  transform-origin: top right;
   transition:
-    opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
-    visibility 0s 0s;
-  visibility: visible;
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease;
 }
 
 /* Subtle top gradient accent */
-.profile-dropdown::before {
+.dashboard-menu::before {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    #6366f1 0%,
-    #a855f7 40%,
-    #ec4899 100%
-  );
-  border-radius: 16px 16px 0 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+      #6366f1 0%,
+      #a855f7 40%,
+      #ec4899 100%);
+  border-radius: 0 0 4px 4px;
   z-index: 2;
 }
 
-/* ---- Closed state ---- */
-.profile-dropdown.close {
+/* ---- Open / Close state toggle ---- */
+.dashboard-menu.close,
+.dashboard-menu[data-state="closed"] {
+  transform: translateX(110%);
   opacity: 0;
-  transform: translateY(-8px) scale(0.95);
   pointer-events: none;
   visibility: hidden;
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease,
-    visibility 0s 0.2s;
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    visibility 0s 0.4s;
+  /* delay visibility until animation finishes */
 }
 
-/* ---- Arrow pointing up ---- */
-.dropdown-arrow {
+.dashboard-menu.open,
+.dashboard-menu[data-state="open"] {
+  transform: translateX(0%);
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.35s ease,
+    visibility 0s 0s;
+}
+
+/* ---------- Close / Toggle Button ---------- */
+.function-button {
   position: absolute;
-  top: -6px;
-  right: 16px;
-  width: 12px;
-  height: 12px;
-  background: rgba(15, 15, 25, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: none;
-  border-right: none;
-  transform: rotate(45deg);
+  top: 18px;
+  right: 18px;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+  z-index: 3;
+}
+
+.function-button img {
+  width: 18px;
+  height: 18px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
+}
+
+.function-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.25);
+  transform: scale(1.08);
+}
+
+.function-button:hover img {
+  transform: rotate(90deg);
+}
+
+.function-button:active {
+  transform: scale(0.94);
+}
+
+/* Visually-hidden when "open" state class is on button itself */
+.function-button.open {
+  opacity: 1;
+}
+
+.function-button.close {
+  opacity: 0.5;
+}
+
+/* ---------- Profile Section ---------- */
+.profile-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 52px 28px 28px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: relative;
+}
+
+/* Soft glow behind avatar */
+.profile-image::after {
+  content: "";
+  position: absolute;
+  top: 50px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+      rgba(99, 102, 241, 0.25) 0%,
+      transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.profile-image img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid rgba(168, 85, 247, 0.5);
+  box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profile-image img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 28px rgba(168, 85, 247, 0.35);
+}
+
+.profile-image h1 {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #f1f1f4;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+  position: relative;
   z-index: 1;
 }
 
-/* ============================================
-   Profile Section (inside dropdown)
-   ============================================ */
-.dropdown-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 18px 14px;
-}
-
-.dropdown-avatar {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(168, 85, 247, 0.4);
-  box-shadow: 0 0 12px rgba(168, 85, 247, 0.15);
-  flex-shrink: 0;
-}
-
-.dropdown-user-info {
+/* ---------- Options / Menu Items ---------- */
+.options {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  min-width: 0;
+  gap: 6px;
+  padding: 22px 20px;
+  flex: 1;
 }
 
-.dropdown-user-name {
-  font-family: "Inter", "Segoe UI", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #f1f1f4;
-  text-transform: capitalize;
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.dropdown-user-email {
-  font-family: "Inter", "Segoe UI", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.45);
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* ============================================
-   Divider
-   ============================================ */
-.dropdown-divider {
-  height: 1px;
-  background: rgba(255, 255, 255, 0.06);
-  margin: 0;
-}
-
-/* ============================================
-   Menu Items
-   ============================================ */
-.dropdown-options {
-  display: flex;
-  flex-direction: column;
-  padding: 6px 8px;
-}
-
-.dropdown-item {
+/* Shared style for all option items */
+.options>div {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 10px 12px;
-  border-radius: 10px;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 12px;
   font-family: "Inter", "Segoe UI", sans-serif;
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.78);
   letter-spacing: 0.2px;
@@ -202,36 +201,45 @@
   position: relative;
   overflow: hidden;
   transition:
-    background 0.2s ease,
-    color 0.2s ease,
-    transform 0.15s ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
   text-transform: capitalize;
 }
 
-.dropdown-item svg {
-  flex-shrink: 0;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
+/* Hover shimmer effect */
+.options>div::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      transparent 60%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-.dropdown-item:hover svg {
+.options>div:hover::before {
   opacity: 1;
 }
 
-.dropdown-item:hover {
+.options>div:hover {
   background: rgba(255, 255, 255, 0.06);
   color: #fff;
-  transform: translateX(2px);
+  transform: translateX(4px);
+  box-shadow: 0 2px 16px rgba(99, 102, 241, 0.08);
 }
 
-.dropdown-item:active {
-  transform: translateX(1px) scale(0.98);
+.options>div:active {
+  transform: translateX(2px) scale(0.98);
 }
 
-/* ---- Individual accent colors on hover ---- */
+/* ---- Individual item accent colors ---- */
 
 /* Edit Profile — Indigo */
-.dropdown-item.edit-profile::after {
+.edit-profile::after {
   content: "";
   position: absolute;
   left: 0;
@@ -243,12 +251,13 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.dropdown-item.edit-profile:hover::after {
+
+.edit-profile:hover::after {
   opacity: 1;
 }
 
 /* Orders — Amber */
-.dropdown-item.orders::after {
+.orders::after {
   content: "";
   position: absolute;
   left: 0;
@@ -260,12 +269,13 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.dropdown-item.orders:hover::after {
+
+.orders:hover::after {
   opacity: 1;
 }
 
 /* Cart — Emerald */
-.dropdown-item.cart::after {
+.cart::after {
   content: "";
   position: absolute;
   left: 0;
@@ -277,12 +287,13 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.dropdown-item.cart:hover::after {
+
+.cart:hover::after {
   opacity: 1;
 }
 
 /* Wishlist — Rose */
-.dropdown-item.wishlist::after {
+.wishlist::after {
   content: "";
   position: absolute;
   left: 0;
@@ -294,16 +305,19 @@
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.dropdown-item.wishlist:hover::after {
+
+.wishlist:hover::after {
   opacity: 1;
 }
 
-/* Logout — danger style */
-.dropdown-item.logout {
-  margin-top: 0;
+/* Logout — distinct danger style */
+.logout {
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 18px !important;
 }
 
-.dropdown-item.logout::after {
+.logout::after {
   content: "";
   position: absolute;
   left: 0;
@@ -316,26 +330,72 @@
   transition: opacity 0.3s ease;
 }
 
-.dropdown-item.logout:hover {
-  background: rgba(239, 68, 68, 0.08);
-  color: #fca5a5;
+.logout:hover {
+  background: rgba(239, 68, 68, 0.08) !important;
+  color: #fca5a5 !important;
 }
 
-.dropdown-item.logout:hover::after {
+.logout:hover::after {
   opacity: 1;
 }
 
-/* Bottom padding for the last section */
-.dropdown-options:last-child {
-  padding-bottom: 8px;
+/* ---------- Backdrop overlay ---------- */
+.dashboard-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity 0.35s ease,
+    visibility 0s 0s;
 }
 
-/* ============================================
-   Responsive
-   ============================================ */
+.dashboard-overlay.hidden,
+.dashboard-overlay[data-state="hidden"] {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition:
+    opacity 0.35s ease,
+    visibility 0s 0.35s;
+}
+
+/* ---------- Scrollbar ---------- */
+.dashboard-menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dashboard-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dashboard-menu::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.dashboard-menu::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.hidden{
+  z-index: 20;
+  position: relative;
+}
+
+/* ---------- Responsive ---------- */
 @media (max-width: 480px) {
-  .profile-dropdown {
-    width: 260px;
-    right: -8px;
+  .dashboard-menu {
+    width: 100vw;
+    border-left: none;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .dashboard-menu {
+    width: 300px;
   }
 }
