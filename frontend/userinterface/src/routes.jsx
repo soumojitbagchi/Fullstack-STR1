@@ -10,58 +10,58 @@ import AboutUs from "./firstInterface/pages/aboutUs";
 import Contact from "./firstInterface/pages/Contact";
 import Dashboard from "./firstInterface/pages/Dashboard";
 import ProtectedRoute from "./firstInterface/components/ProtectedRoute";
-import OutsideDashBoard from "./firstInterface/onClickingOutside/pages/OutsideDashBoard";
 import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.context";
 
 const AppRoutes = () => {
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <div>
-            <Navbar /> <Home />
-          </div>
-        }
-      />
-      <Route
-        path="/aboutUs"
-        element={
-          <div>
-            <Navbar />
-            <AboutUs />
-          </div>
-        }
-      />
-      <Route
-        path="/contact"
-        element={
-          <div>
-            <Navbar />
-            <Contact />{" "}
-          </div>
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <div>
-            <BackButton />
-            <Login />
-          </div>
-        }
-      />
-      <Route path="/signup" element={<Signup />} />
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/outside" element={<DashboardProvider><OutsideDashBoard /></DashboardProvider>} />
-    </Routes>
+    <DashboardProvider>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <Navbar /> <Home />
+            </div>
+          }
+        />
+        <Route
+          path="/aboutUs"
+          element={
+            <div>
+              <Navbar />
+              <AboutUs />
+            </div>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <div>
+              <Navbar />
+              <Contact />{" "}
+            </div>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <div>
+              <BackButton />
+              <Login />
+            </div>
+          }
+        />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </DashboardProvider>
   );
 };
 export default AppRoutes;

@@ -4,6 +4,12 @@ import aboutUs from "../pages/aboutUs";
 import "../Container.css"
 
 const Navbar = () => {
+  const { open, setOpen } = useAuth();
+
+  const toggleDropdown = () => {
+    setOpen(!open);
+  };
+
   return (
     <nav className="navbar">
       <NavLink
@@ -61,6 +67,25 @@ const Navbar = () => {
         >
           SignUp
         </NavLink>
+
+        {/* Profile icon — toggles the dropdown */}
+        <div className="profile-trigger-wrapper">
+          <button
+            className="profile-trigger"
+            onClick={toggleDropdown}
+            aria-label="Toggle profile menu"
+            aria-expanded={open}
+          >
+            <img
+              src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA"
+              alt="profile"
+              className="profile-trigger-img"
+            />
+          </button>
+
+          {/* The dropdown — rendered inside the wrapper for positioning */}
+          <OutsideDashBoard />
+        </div>
       </div>
     </nav>
   );

@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       const payload = decodeToken(token);
       if (payload && payload.exp * 1000 > Date.now()) {
-        setUser({ id: payload.id, name: payload.user || payload.email });
+        setUser({ id: payload.id, name: payload.user ,email: payload.email });
       } else {
         localStorage.removeItem('token'); // expired
       }
