@@ -1,9 +1,9 @@
 const user= require("../models/user.model")
 
 const getMeController =async (req,res)=>{
-    const decoded = req.user._id
+    const decoded = req.user.id
     try {
-       const userDetails = await user.findById({decoded})
+       const userDetails = await user.findById(decoded)
     res.status(200).json({
         username:userDetails.user,
         email:userDetails.email

@@ -19,17 +19,18 @@ const registerController =  async (req, res) => {
   const token = jwt.sign(
     {
       id: data._id,
+      email:data.email,
       user: data.user,
     },
     process.env.JWT_KEY,{expiresIn:'3h'}
   );
-  res.cookie("login-credential", token);
+  res.cookie("token", token);
   res.status(201).json({ message: "User registered successfully", token });
 }
 
 const loginController = async (req, res) => {
-  const { email, password } = req.body;
-  const data = await userData.findOne({ email:email });
+  const { email, password ,user} = req.body;
+  const data = await userData.findOne({$or:[ {email:email},{user:user} ]});
   if (!data) {
     return res.status(404).json({ message: "User not found" });
   }
@@ -41,10 +42,11 @@ const loginController = async (req, res) => {
     {
       id: data._id,
       email: data.email,
+      user:data.user
     },
     process.env.JWT_KEY,{expiresIn:'3h'}
   );
-  res.cookie("login-credential", token);
+  res.cookie("token", token);
   res.status(201).json({ message: "Login successful", token });
 }
 
