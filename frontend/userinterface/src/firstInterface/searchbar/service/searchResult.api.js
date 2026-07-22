@@ -1,0 +1,16 @@
+import axios from "axios";
+const api = axios.create({
+  baseURL: "http://localhost:8080/api/products",
+  withCredentials: true,
+});
+export const searchResult = async ({ search }) => {
+  try {
+    const response = await api.get("/search", { name: search });
+    return response.data;
+  } catch (error) {
+    console.error(
+      "unable to fetch data",
+      error.response?.data || error.massage,
+    );
+  }
+};

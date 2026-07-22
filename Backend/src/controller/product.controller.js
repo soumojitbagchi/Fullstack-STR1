@@ -29,8 +29,8 @@ const getCategories = async (req, res) => {
 }
 const getResults = async(req, res)=>{
   try{
-    const {searchedItem}= req.body
-    const result = await Product.find({searchedItem}).limit(10)
+    const {name}= req.body
+    const result = await Product.find({name}).limit(10)
     res.status(200).json(result)
   }catch{
     res.status(500).json({
@@ -38,5 +38,4 @@ const getResults = async(req, res)=>{
     })
   }
 }
-
 module.exports = { getAllProducts, getProductsByCategory, getCategories , getResults}

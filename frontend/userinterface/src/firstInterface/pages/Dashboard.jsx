@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState({});
   const [openSideBar, setopenSideBar] = useState(false);
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("");
 
   const outsidedashboard = () => {
     setopenSideBar(!openSideBar);
@@ -59,16 +59,16 @@ export default function Dashboard() {
     return Math.round(((original - current) / original) * 100);
   };
 
-  const searchHandler = (e)=>{
-    setLoading(true)
+  const searchHandler = (e) => {
+    setLoading(true);
     try {
-      console.log('search')
+      console.log("search");
     } catch (error) {
-      throw error
-    }finally{
-      setLoading(false)
+      throw error;
+    } finally {
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="dashboard">
@@ -84,8 +84,18 @@ export default function Dashboard() {
               type="text"
               placeholder="Enter product name"
             />
-            <button className="search-icon-button" type="button" aria-label="Search">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+            <button
+              className="search-icon-button"
+              type="button"
+              aria-label="Search"
+              onClick={searchHandler}
+              onChange={(e) => setSearch(e.target.value)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
                 <path d="M18.031 16.6168L22.3137 20.8995L20.8995 22.3137L16.6168 18.031C15.0769 19.263 13.124 20 11 20C6.032 20 2 15.968 2 11C2 6.032 6.032 2 11 2C15.968 2 20 6.032 20 11C20 13.124 19.263 15.0769 18.031 16.6168ZM16.0247 15.8748C17.2475 14.6146 18 12.8956 18 11C18 7.1325 14.8675 4 11 4C7.1325 4 4 7.1325 4 11C4 14.8675 7.1325 18 11 18C12.8956 18 14.6146 17.2475 15.8748 16.0247L16.0247 15.8748Z"></path>
               </svg>
             </button>
