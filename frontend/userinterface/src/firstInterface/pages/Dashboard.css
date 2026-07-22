@@ -22,7 +22,7 @@
   width: 100%;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
+  padding: 20px 30px;
   border-bottom: 1px solid #222;
   margin-bottom: 24px;
   position: sticky;
@@ -30,19 +30,25 @@
   background: #000;
   position: relative;
   z-index: 10;
-  gap: 16px;
+}
+.dashboard-component-right{
+  width: 85%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  right: 50%;
 }
 .search-bar {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
-  max-width: 320px;
+  min-width: 200px;
   margin: 0 auto;
 }
 
 .dashboard-search-input {
-  width: 100%;
+  width: 66%;
   padding: 10px 14px;
   border: 1px solid #333;
   border-radius: 999px;

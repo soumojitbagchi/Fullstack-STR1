@@ -1,47 +1,52 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import { fetchAllProducts, fetchCategories, fetchProductsByCategory } from '../services/productApi';
-import './Dashboard.css';
-import OutsideDashBoard from '../onClickingOutside/pages/OutsideDashBoard';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
+import {
+  fetchAllProducts,
+  fetchCategories,
+  fetchProductsByCategory,
+} from "../services/productApi";
+import "./Dashboard.css";
+import OutsideDashBoard from "../onClickingOutside/pages/OutsideDashBoard";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory, setActiveCategory] = useState("all");
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState({});
-  const [openSideBar, setopenSideBar] = useState(false)
+  const [openSideBar, setopenSideBar] = useState(false);
 
-  const outsidedashboard = ()=>{
-    setopenSideBar(!openSideBar)
-    console.log(user)
-  }
+  const outsidedashboard = () => {
+    setopenSideBar(!openSideBar);
+    console.log(user);
+  };
 
   useEffect(() => {
     fetchCategories()
-      .then(data => setCategories(['all', ...data]))
-      .catch(err => console.error(err));
+      .then((data) => setCategories(["all", ...data]))
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
     setLoading(true);
-    const load = activeCategory === 'all'
-      ? fetchAllProducts()
-      : fetchProductsByCategory(activeCategory);
+    const load =
+      activeCategory === "all"
+        ? fetchAllProducts()
+        : fetchProductsByCategory(activeCategory);
 
     load
-      .then(data => setProducts(data))
-      .catch(err => console.error(err))
+      .then((data) => setProducts(data))
+      .catch((err) => console.error(err))
       .finally(() => setLoading(false));
   }, [activeCategory]);
 
   const toggleFavorite = (productId) => {
-    setFavorites(prev => ({
+    setFavorites((prev) => ({
       ...prev,
-      [productId]: !prev[productId]
+      [productId]: !prev[productId],
     }));
   };
 
@@ -60,21 +65,29 @@ export default function Dashboard() {
           <h1 className="dashboard-title">Products</h1>
           <span className="dashboard-welcome">Welcome, {user.name}</span>
         </div>
-        <div className="search-bar">
-          <input className="dashboard-search-input" type="text" placeholder="Enter product name" />
+        <div className="dashboard-component-right">
+          <div className="search-bar">
+            <input
+              className="dashboard-search-input"
+              type="text"
+              placeholder="Enter product name"
+            />
+          </div>
+
+          <div className="dashboard-outside">
+            <img
+              src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA"
+              alt=""
+            />
+          </div>
         </div>
-        
-        <div className="dashboard-outside" >
-          <img src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA" alt="" />
-        </div>
-     
       </header>
-        
+
       <div className="dashboard-filters">
-        {categories.map(cat => (
+        {categories.map((cat) => (
           <button
             key={cat}
-            className={`filter-btn ${activeCategory === cat ? 'filter-btn-active' : ''}`}
+            className={`filter-btn ${activeCategory === cat ? "filter-btn-active" : ""}`}
             onClick={() => setActiveCategory(cat)}
           >
             {cat}
@@ -90,7 +103,7 @@ export default function Dashboard() {
 
       {!loading && (
         <div className="product-grid">
-          {products.map(product => (
+          {products.map((product) => (
             <div className="product-card" key={product.id}>
               <div className="product-image-wrapper">
                 <img
@@ -102,14 +115,18 @@ export default function Dashboard() {
                 <button
                   className="love-btn"
                   onClick={() => toggleFavorite(product.id)}
-                  aria-label={favorites[product.id] ? 'Remove from favorites' : 'Add to favorites'}
+                  aria-label={
+                    favorites[product.id]
+                      ? "Remove from favorites"
+                      : "Add to favorites"
+                  }
                 >
                   <svg
                     width="24"
                     height="24"
                     viewBox="0 0 24 24"
-                    fill={favorites[product.id] ? '#e53e3e' : 'none'}
-                    stroke={favorites[product.id] ? '#e53e3e' : '#ffffff'}
+                    fill={favorites[product.id] ? "#e53e3e" : "none"}
+                    stroke={favorites[product.id] ? "#e53e3e" : "#ffffff"}
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -136,7 +153,9 @@ export default function Dashboard() {
 
                 <div className="product-price-row">
                   <div className="price-group">
-                    <span className="product-price">${product.price.toFixed(2)}</span>
+                    <span className="product-price">
+                      ${product.price.toFixed(2)}
+                    </span>
                     {product.hasDiscount && (
                       <span className="product-original-price">
                         ${product.originalPrice.toFixed(2)}
@@ -147,11 +166,12 @@ export default function Dashboard() {
 
                 <div className="product-stock">
                   {product.stock > 0 ? (
-                    <span className={`stock-text ${product.stock <= 5 ? 'stock-low' : 'stock-ok'}`}>
+                    <span
+                      className={`stock-text ${product.stock <= 5 ? "stock-low" : "stock-ok"}`}
+                    >
                       {product.stock <= 5
                         ? `Only ${product.stock} left`
-                        : `${product.stock} in stock`
-                      }
+                        : `${product.stock} in stock`}
                     </span>
                   ) : (
                     <span className="stock-text stock-none">Unavailable</span>
@@ -162,7 +182,7 @@ export default function Dashboard() {
                   className="add-to-cart-btn"
                   disabled={product.stock === 0}
                 >
-                  {product.stock === 0 ? 'Sold Out' : 'Add to Cart'}
+                  {product.stock === 0 ? "Sold Out" : "Add to Cart"}
                 </button>
               </div>
             </div>

@@ -24,7 +24,7 @@ const signup = () => {
         {user,email,password}
       )
       authLogin(response.data.token);  // saves to localStorage + updates context
-      navigate("/dashboard");
+      navigate("/");
     } catch (error) {
       console.log(error)
     }

@@ -66,8 +66,8 @@ const Contact = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-center mb-16"
-      >x
-        <p className="text-gray-400 text-lg max-w-xl mx-auto">
+      >
+        <p className="text-gray-400 text-lg max-w-2xl m-5 mx-auto">
           Have a question or just want to say hello? We'd love to hear from you.
         </p>
       </motion.div>
