@@ -1,0 +1,5 @@
+implement some more features like #todo
+i. functional feedback  
+ii. searchbar's suggestion 
+iii. implement floating profilebar
+iv. increase schema size and store more user details
