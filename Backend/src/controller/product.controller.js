@@ -27,5 +27,16 @@ const getCategories = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch categories', error: error.message })
   }
 }
+const getResults = async(req, res)=>{
+  try{
+    const {searchedItem}= req.body
+    const result = await Product.find({searchedItem}).limit(10)
+    res.status(200).json(result)
+  }catch{
+    res.status(500).json({
+      message:"failed to fetched item"
+    })
+  }
+}
 
-module.exports = { getAllProducts, getProductsByCategory, getCategories }
+module.exports = { getAllProducts, getProductsByCategory, getCategories , getResults}

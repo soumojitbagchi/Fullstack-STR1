@@ -60,16 +60,16 @@ export default function Dashboard() {
           <h1 className="dashboard-title">Products</h1>
           <span className="dashboard-welcome">Welcome, {user.name}</span>
         </div>
-        <div className="dashboard-outside" onClick={()=>{
-          outsidedashboard()
-        }}>
+        <div className="search-bar">
+          <input className="dashboard-search-input" type="text" placeholder="Enter product name" />
+        </div>
+        
+        <div className="dashboard-outside" >
           <img src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA" alt="" />
         </div>
-        <div className={` ${!openSideBar?"hidden": "reveal"}`}>
-          <outsidedashboard/>
-        </div>
+     
       </header>
-        {open&& <OutsideDashBoard/>}
+        
       <div className="dashboard-filters">
         {categories.map(cat => (
           <button

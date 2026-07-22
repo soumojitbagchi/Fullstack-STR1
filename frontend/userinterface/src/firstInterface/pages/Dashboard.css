@@ -19,6 +19,7 @@
 }
 .dashboard-header {
   display: flex;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
@@ -27,13 +28,45 @@
   position: sticky;
   top: 0;
   background: #000;
+  position: relative;
   z-index: 10;
+  gap: 16px;
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.dashboard-search-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #333;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  outline: none;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.dashboard-search-input::placeholder {
+  color: #666;
+}
+
+.dashboard-search-input:focus {
+  border-color: #fff;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.12);
 }
 
 .dashboard-header-left {
   display: flex;
   align-items: baseline;
   gap: 16px;
+  
 }
 
 .dashboard-title {

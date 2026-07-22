@@ -1,6 +1,8 @@
-const authMiddleware = require('../middleware/auth.middleware');
-
-
+const express = require("express");
 const userRoutes = express.Router();
 
-userRoutes.post('/user', authMiddleware, 'name of controller')
+const authMiddleware = require("../middleware/auth.middleware");
+const userController = require("../controller/user.controller");
+
+userRoutes.post("/getme", authMiddleware, userController.getMeController);
+module.exports = userRoutes;
