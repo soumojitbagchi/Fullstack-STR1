@@ -14,3 +14,19 @@ export const searchResult = async ({ search }) => {
     );
   }
 };
+export const filterByCatagory = async () => {
+  try {
+    const response =await api.get('/catagory/:catagoryName')
+    return response.data
+  } catch (error) {
+    console.error("unable to fetch data",error)
+  }
+}
+export const catagoryList = async ()=>{
+  try {
+    const response = await api.get('/catagories')
+    return response.data
+  } catch (error) {
+    console.error("unable to fetch",error)
+  }
+}

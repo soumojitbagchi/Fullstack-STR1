@@ -1,7 +1,6 @@
 import { useContext } from "react";
-import { searchFunctionalContext } from "../search.context";
-import { searchResult } from "../service/searchResult.api";
-import { useAuth } from "../../../hooks/useAuth";
+import { SearchFunctionalContext } from "../search.context";
+import { searchResult ,filterByCatagory , catagoryList} from "../service/searchResult.api";
 /**
  * @use we use usecontext when we dont want to insert uneccesary prop into files , we can use the specific we want . for details check auth.context.js
  * @description we can say we need to pass the data from the authprovider so we ise the createContext there and we make use context here, 
@@ -9,21 +8,39 @@ import { useAuth } from "../../../hooks/useAuth";
  */
 
 export  const useSearch =()=>{
-    const context = useContext(searchFunctionalContext)
-    const {product , setProduct} = context()
-    const {loading,setLoading} = useAuth()
-    const searchResultHandel =({name})=>{
+    const context = useContext(SearchFunctionalContext)
+    const {product , setProduct, loading , setLoading} = context
+    const searchResultHandler = async ({name})=>{
         setLoading(true)
         try {
             const response = await searchResult({name})
-            return response
+            setProduct(response)
         } catch (error) {
             console.log(error)
         }finally{
             setLoading(false)
         }
     }
-    return{
-        searchFunctionalContext
+    const searchResultbyCaragoryHandler = async ({catagory})=>{
+        setLoading(true)
+        try {
+            const response = await filterByCatagory({catagory})
+            setProduct(response)
+        } catch (error) {
+            console.log(error)
+        }finally{
+            setLoading(false)
+        }
     }
+    const catagoriesHandeler= async()=>{
+        try{
+            const response =await catagoryList()
+            return response
+        }catch(error){
+            console.log(error)
+        }
+    }
+    return({
+        loading,product , catagoriesHandeler,searchResultHandler,searchResultbyCaragoryHandler
+    })
 }

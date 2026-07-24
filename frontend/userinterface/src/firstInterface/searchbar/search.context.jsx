@@ -1,12 +1,13 @@
 import { createContext ,useState} from "react";
 
-export const searchFunctionalContext= createContext()
-export const searchFunctionalProvider= ({children})=>{
+export const SearchFunctionalContext= createContext()
+export const SearchFunctionalProvider= ({children})=>{
     const [product, setProduct] = useState([])
+    const [loading, setLoading] = useState(false)
 
     return (
-        <searchFunctionalContext.Provider value={product,setProduct}>
-            {{children}}
-        </searchFunctionalContext.Provider>
+        <SearchFunctionalContext.Provider value={{product,setProduct , loading, setLoading}}>
+            {children}
+        </SearchFunctionalContext.Provider>
     )
 }

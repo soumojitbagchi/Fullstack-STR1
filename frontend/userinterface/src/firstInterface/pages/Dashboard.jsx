@@ -6,12 +6,13 @@ import {
   fetchCategories,
   fetchProductsByCategory,
 } from "../services/productApi";
+import { useSearch } from "../searchbar/Hooks/useSearch";
 import "./Dashboard.css";
 import OutsideDashBoard from "../onClickingOutside/pages/OutsideDashBoard";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const {searchResultHandler }= useSearch()
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -59,12 +60,18 @@ export default function Dashboard() {
     return Math.round(((original - current) / original) * 100);
   };
 
+  /**
+   * @description send call over the api to fetch data from database
+   *  
+   */
+
   const searchHandler = (e) => {
+
     setLoading(true);
     try {
-      console.log("search");
+      searchResultHandler(search)
     } catch (error) {
-      throw error;
+      console.log("unable to doit", error)
     } finally {
       setLoading(false);
     }

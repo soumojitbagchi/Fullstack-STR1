@@ -11,6 +11,7 @@ import Contact from "./firstInterface/pages/Contact";
 import Dashboard from "./firstInterface/pages/Dashboard";
 import ProtectedRoute from "./firstInterface/components/ProtectedRoute";
 import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.context";
+import { SearchFunctionalProvider } from "./firstInterface/searchbar/search.context";
 
 const AppRoutes = () => {
   return (
@@ -56,7 +57,9 @@ const AppRoutes = () => {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <Dashboard />
+              <SearchFunctionalProvider>
+                <Dashboard />
+              </SearchFunctionalProvider>
             </ProtectedRoute>
           }
         />
