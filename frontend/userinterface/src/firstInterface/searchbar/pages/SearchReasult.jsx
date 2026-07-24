@@ -1,14 +1,8 @@
 import React from 'react'
-import './SearchReasult.css'
+import '../style/SearchReasult.css'
 
 const SearchResult = ({ product }) => {
-  const item = product || {
-    title: 'Premium wireless headphones',
-    price: '$89.99',
-    description: 'Comfortable over-ear headphones with rich sound, noise cancellation, and long battery life.',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=900&q=80',
-    badge: 'Top rated',
-  }
+  const item = product
 
   return (
     <div className="search-result-card">
