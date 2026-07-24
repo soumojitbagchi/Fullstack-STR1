@@ -3,14 +3,14 @@ const api = axios.create({
   baseURL: "http://localhost:8080/api/products",
   withCredentials: true,
 });
-export const searchResult = async ({ search }) => {
+export const searchResult = async ({ name }) => {
   try {
-    const response = await api.get("/search", { name: search });
+    const response = await api.get("/search", { params:name });
     return response.data;
-  } catch (error) {
+  } catch (err) {
     console.error(
       "unable to fetch data",
-      error.response?.data || error.massage,
+      err.response?.data || err.massage,
     );
   }
 };
@@ -18,15 +18,15 @@ export const filterByCatagory = async () => {
   try {
     const response =await api.get('/catagory/:catagoryName')
     return response.data
-  } catch (error) {
-    console.error("unable to fetch data",error)
+  } catch (err) {
+    console.error("unable to fetch data",err)
   }
 }
 export const catagoryList = async ()=>{
   try {
     const response = await api.get('/catagories')
     return response.data
-  } catch (error) {
-    console.error("unable to fetch",error)
+  } catch (err) {
+    console.error("unable to fetch",err)
   }
 }

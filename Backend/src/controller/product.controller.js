@@ -29,7 +29,7 @@ const getCatagories = async (req, res) => {
 }
 const getResults = async(req, res)=>{
   try{
-    const {name}= req.body
+    const {name}= req.query
     const result = await Product.find({name}).limit(10)
     res.status(200).json(result)
   }catch{

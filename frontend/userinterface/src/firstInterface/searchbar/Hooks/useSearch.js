@@ -15,6 +15,7 @@ export  const useSearch =()=>{
         try {
             const response = await searchResult({name})
             setProduct(response)
+            console.log(response)
         } catch (error) {
             console.log(error)
         }finally{

@@ -12,7 +12,7 @@ import OutsideDashBoard from "../onClickingOutside/pages/OutsideDashBoard";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
-  const {searchResultHandler }= useSearch()
+  const { searchResultHandler } = useSearch();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -62,16 +62,15 @@ export default function Dashboard() {
 
   /**
    * @description send call over the api to fetch data from database
-   *  
+   *
    */
 
-  const searchHandler = (e) => {
-
+  const searchHandler = () => {
     setLoading(true);
     try {
-      searchResultHandler(search)
+      searchResultHandler(search);
     } catch (error) {
-      console.log("unable to doit", error)
+      console.log("unable to doit", error);
     } finally {
       setLoading(false);
     }
@@ -95,7 +94,7 @@ export default function Dashboard() {
               className="search-icon-button"
               type="button"
               aria-label="Search"
-              onClick={searchHandler}
+              onClick={()=>searchHandler()}
               onChange={(e) => setSearch(e.target.value)}
             >
               <svg
