@@ -5,17 +5,15 @@ import { useSearch } from '../Hooks/useSearch'
 
 const Feed = () => {
   const {product}= useSearch()
-  const result = product
-
   return (
     <div className="search-results">
       <div className="search-results__header">
         <h2>Search results</h2>
-        <span>{result.length} items</span>
+        <span>{product.length} items</span>
       </div>
 
       <div className="search-results__list">
-        {result.map((item, index) => (
+        {product.map((item, index) => (
           <SearchResult key={index} product={item} />
         ))}
       </div>

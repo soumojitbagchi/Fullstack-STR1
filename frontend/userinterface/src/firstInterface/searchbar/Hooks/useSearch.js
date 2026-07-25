@@ -17,7 +17,7 @@ export  const useSearch =()=>{
         setLoading(true)
         try {
             const response = await searchResult({name})
-            setProduct(response)
+            setProduct(response.result)
             console.log(product) //inside the console we got a obj which has a two property and result contain data
         } catch (error) {
             console.log(error)
