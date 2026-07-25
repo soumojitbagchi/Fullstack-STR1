@@ -1,24 +1,12 @@
 import { useState } from 'react';
-import { useAuth } from '../state/AuthContext';
+import { useAuth } from '../firstInterface/context/AuthContext';
 import { loginUser, registerUser } from '../api/authApi';
 
-/**
- *@description useAuthActions — orchestration hook for authentication flows.
- *
- * Bridges the API layer (authApi) with the State layer (AuthContext).
- * UI components call these methods instead of importing axios directly.
- *
- * @structure Flow: UI → useAuthActions → authApi (HTTP) → AuthContext (state update)
- */
 export const useAuthActions = () => {
   const auth = useAuth();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
 
-  /**
-   * Handle login — calls API, updates auth state.
-   * @returns {{ success: boolean }}
-   */
   const handleLogin = async (email, password) => {
     setIsSubmitting(true);
     setError(null);
@@ -34,10 +22,6 @@ export const useAuthActions = () => {
     }
   };
 
-  /**
-   * Handle signup — calls API, updates auth state.
-   * @returns {{ success: boolean }}
-   */
   const handleSignup = async (user, email, password) => {
     setIsSubmitting(true);
     setError(null);
@@ -53,24 +37,16 @@ export const useAuthActions = () => {
     }
   };
 
-  /**
-   * Handle logout — clears auth state.
-   */
   const handleLogout = () => {
     auth.logout();
   };
 
   return {
-    // State from AuthContext
     user: auth.user,
     loading: auth.loading,
-
-    // Orchestrated actions
     handleLogin,
     handleSignup,
     handleLogout,
-
-    // Action state
     isSubmitting,
     error,
     clearError: () => setError(null),

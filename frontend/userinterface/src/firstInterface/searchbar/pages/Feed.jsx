@@ -1,19 +1,21 @@
 import React from 'react'
 import SearchResult from './SearchReasult'
-import './SearchReasult.css'
+import '../style/SearchReasult.css'
+import { useSearch } from '../Hooks/useSearch'
 
 const Feed = () => {
-  const searchResults =null
+  const {product}= useSearch()
+  const result = product
 
   return (
     <div className="search-results">
       <div className="search-results__header">
         <h2>Search results</h2>
-        <span>{searchResults.length} items</span>
+        <span>{result.length} items</span>
       </div>
 
       <div className="search-results__list">
-        {searchResults.map((item, index) => (
+        {result.map((item, index) => (
           <SearchResult key={index} product={item} />
         ))}
       </div>

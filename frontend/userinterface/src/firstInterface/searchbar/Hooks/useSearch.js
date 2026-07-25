@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext , useEffect } from "react";
 import { SearchFunctionalContext } from "../search.context";
 import { searchResult ,filterByCatagory , catagoryList} from "../service/searchResult.api";
 /**
@@ -10,12 +10,15 @@ import { searchResult ,filterByCatagory , catagoryList} from "../service/searchR
 export  const useSearch =()=>{
     const context = useContext(SearchFunctionalContext)
     const {product , setProduct, loading , setLoading} = context
+    useEffect(()=>{
+        console.log(product)
+    },[product])
     const searchResultHandler = async ({name})=>{
         setLoading(true)
         try {
             const response = await searchResult({name})
             setProduct(response)
-            console.log(response)
+            console.log(product) //inside the console we got a obj which has a two property and result contain data
         } catch (error) {
             console.log(error)
         }finally{

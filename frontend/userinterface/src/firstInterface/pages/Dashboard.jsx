@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [favorites, setFavorites] = useState({});
   const [openSideBar, setopenSideBar] = useState(false);
   const [search, setSearch] = useState("");
+  const navigate= useNavigate()
 
   const outsidedashboard = () => {
     setopenSideBar(!openSideBar);
@@ -68,7 +69,8 @@ export default function Dashboard() {
   const searchHandler = () => {
     setLoading(true);
     try {
-      searchResultHandler(search);
+      searchResultHandler({ name: search });
+      navigate("/search")
     } catch (error) {
       console.log("unable to doit", error);
     } finally {
@@ -81,7 +83,7 @@ export default function Dashboard() {
       <header className="dashboard-header">
         <div className="dashboard-header-left">
           <h1 className="dashboard-title">Products</h1>
-          <span className="dashboard-welcome">Welcome, {user.name}</span>
+          <span className="dashboard-welcome">Welcome, {user.name }</span>
         </div>
         <div className="dashboard-component-right">
           <div className="search-bar">
@@ -89,13 +91,13 @@ export default function Dashboard() {
               className="dashboard-search-input"
               type="text"
               placeholder="Enter product name"
+              onChange={(e) => setSearch(e.target.value)}
             />
             <button
               className="search-icon-button"
               type="button"
               aria-label="Search"
-              onClick={()=>searchHandler()}
-              onChange={(e) => setSearch(e.target.value)}
+              onClick={searchHandler}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

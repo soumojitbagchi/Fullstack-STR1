@@ -12,6 +12,7 @@ import Dashboard from "./firstInterface/pages/Dashboard";
 import ProtectedRoute from "./firstInterface/components/ProtectedRoute";
 import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.context";
 import { SearchFunctionalProvider } from "./firstInterface/searchbar/search.context";
+import Feed from "./firstInterface/searchbar/pages/Feed";
 
 const AppRoutes = () => {
   return (
@@ -57,10 +58,21 @@ const AppRoutes = () => {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              <SearchFunctionalProvider>
+            
                 <Dashboard />
-              </SearchFunctionalProvider>
+              
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            
+            <Dashboard>
+              <Feed />
+            </Dashboard>
+              
+     
           }
         />
       </Routes>

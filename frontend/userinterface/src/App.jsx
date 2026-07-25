@@ -1,12 +1,12 @@
 import AppRoutes from "./routes";
-import { AuthProvider } from "./state/AuthContext";
+import { SearchFunctionalProvider } from "./firstInterface/searchbar/search.context";
 
 const App = () => {
   return (
     <div>
-      <AuthProvider>
+      <SearchFunctionalProvider>
         <AppRoutes route={AppRoutes} />
-      </AuthProvider>
+      </SearchFunctionalProvider>
     </div>
   );
 };
