@@ -1,6 +1,7 @@
 import React from "react";
 import Home from "./firstInterface/pages/Home";
-import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./firstInterface/components/navbar";
 import BackButton from "./firstInterface/components/BackButton";
@@ -11,11 +12,12 @@ import Contact from "./firstInterface/pages/Contact";
 import Dashboard from "./firstInterface/pages/Dashboard";
 import ProtectedRoute from "./firstInterface/components/ProtectedRoute";
 import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.context";
-import { SearchFunctionalProvider } from "./firstInterface/searchbar/search.context";
 import Feed from "./firstInterface/searchbar/pages/Feed";
 import DashboardHeader from "./firstInterface/pages/DashboardHeader";
 
 const AppRoutes = () => {
+  const navigate = useNavigate()
+
   return (
     <DashboardProvider>
       <Routes>
@@ -67,7 +69,7 @@ const AppRoutes = () => {
           path="/search"
           element={
             <>
-            <DashboardHeader/>
+              <DashboardHeader />
               <Feed />
             </>
           }

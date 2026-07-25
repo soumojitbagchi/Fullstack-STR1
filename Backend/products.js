@@ -118,5 +118,85 @@ module.exports = [
     "image": "http://localhost:8080/images/product_sunglasses.png",
     "stock": 19,
     "hasDiscount": true
+  },
+  {
+    "name": "Cyberpunk Denim Vest",
+    "price": 115.00,
+    "originalPrice": 140.00,
+    "category": "outerwear",
+    "description": "Black denim vest with glowing cyan cybernetic circuit embroidery and metal stud detailing.",
+    "image": "http://localhost:8080/images/product_vest.png",
+    "stock": 10,
+    "hasDiscount": true
+  },
+  {
+    "name": "Over-Ear Cyber Headphones",
+    "price": 199.99,
+    "originalPrice": 249.99,
+    "category": "accessories",
+    "description": "Premium wireless over-ear headphones with active noise cancellation and customizable LED blue ring lights.",
+    "image": "http://localhost:8080/images/product_headphones.png",
+    "stock": 16,
+    "hasDiscount": true
+  },
+  {
+    "name": "Techwear Sling Bag",
+    "price": 85.00,
+    "originalPrice": 85.00,
+    "category": "accessories",
+    "description": "Tactical crossbody sling bag with quick-release metal buckles, weather-resistant nylon, and MOLLE webbing.",
+    "image": "http://localhost:8080/images/product_bag.png",
+    "stock": 20,
+    "hasDiscount": false
+  },
+  {
+    "name": "Abstract Graphic Sweatshirt",
+    "price": 72.50,
+    "originalPrice": 90.00,
+    "category": "tops",
+    "description": "Heavyweight charcoal cotton blend sweatshirt featuring neon lime typography and relaxed streetwear drop-shoulder fit.",
+    "image": "http://localhost:8080/images/product_sweatshirt.png",
+    "stock": 14,
+    "hasDiscount": true
+  },
+  {
+    "name": "Cyber Titanium Smart Ring",
+    "price": 149.99,
+    "originalPrice": 189.99,
+    "category": "accessories",
+    "description": "Titanium smart ring with integrated cyan biometric sensors, LED accent glow, and magnetic charging dock.",
+    "image": "http://localhost:8080/images/product_ring.png",
+    "stock": 11,
+    "hasDiscount": true
+  },
+  {
+    "name": "Tactical Cobra Belt",
+    "price": 42.00,
+    "originalPrice": 42.00,
+    "category": "accessories",
+    "description": "Heavy duty ballistic nylon waist belt with quick-release matte black metal cobra buckle.",
+    "image": "http://localhost:8080/images/product_belt.png",
+    "stock": 25,
+    "hasDiscount": false
+  },
+  {
+    "name": "Iridescent Knit Beanie",
+    "price": 32.00,
+    "originalPrice": 40.00,
+    "category": "accessories",
+    "description": "Black ribbed knit beanie cap featuring an iridescent color-shifting brand patch.",
+    "image": "http://localhost:8080/images/product_beanie.png",
+    "stock": 9,
+    "hasDiscount": true
+  },
+  {
+    "name": "Holographic Windbreaker",
+    "price": 165.00,
+    "originalPrice": 195.00,
+    "category": "outerwear",
+    "description": "Waterproof metallic windbreaker jacket with full spectrum holographic light reflection.",
+    "image": "http://localhost:8080/images/product_windbreaker.png",
+    "stock": 6,
+    "hasDiscount": true
   }
 ];

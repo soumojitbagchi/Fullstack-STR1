@@ -21,7 +21,7 @@ export default function Dashboard() {
   const [favorites, setFavorites] = useState({});
   const [openSideBar, setopenSideBar] = useState(false);
   const [search, setSearch] = useState("");
-  const navigate= useNavigate()
+  const navigate = useNavigate()
 
   const outsidedashboard = () => {
     setopenSideBar(!openSideBar);
@@ -72,7 +72,7 @@ export default function Dashboard() {
   return (
     <div className="dashboard">
       <header className="dashboard-header">
-        <DashboardHeader/>
+        <DashboardHeader />
       </header>
 
       <div className="dashboard-filters">
@@ -95,92 +95,94 @@ export default function Dashboard() {
 
       {!loading && (
         <div className="product-grid">
-          {products.map((product) => (
-            <div className="product-card" key={product.id}>
-              <div className="product-image-wrapper">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="product-image"
-                />
+          {products.map((product) => {
+            const productId = product._id || product.id;
+            return (
+              <div className="product-card" key={productId}>
+                <div className="product-image-wrapper">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="product-image"
+                  />
 
-                <button
-                  className="love-btn"
-                  onClick={() => toggleFavorite(product.id)}
-                  aria-label={
-                    favorites[product.id]
-                      ? "Remove from favorites"
-                      : "Add to favorites"
-                  }
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill={favorites[product.id] ? "#e53e3e" : "none"}
-                    stroke={favorites[product.id] ? "#e53e3e" : "#ffffff"}
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
+                  <button
+                    className="love-btn"
+                    onClick={() => toggleFavorite(productId)}
+                    aria-label={
+                      favorites[productId]
+                        ? "Remove from favorites"
+                        : "Add to favorites"
+                    }
                   >
-                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-                  </svg>
-                </button>
-
-                {product.hasDiscount && (
-                  <span className="discount-badge">
-                    -{getDiscountPercent(product.originalPrice, product.price)}%
-                  </span>
-                )}
-
-                {product.stock === 0 && (
-                  <span className="out-of-stock-badge">Out of Stock</span>
-                )}
-              </div>
-
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-category">{product.category}</p>
-                <p className="product-description">{product.description}</p>
-
-                <div className="product-price-row">
-                  <div className="price-group">
-                    <span className="product-price">
-                      ${product.price.toFixed(2)}
-                    </span>
-                    {product.hasDiscount && (
-                      <span className="product-original-price">
-                        ${product.originalPrice.toFixed(2)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <div className="product-stock">
-                  {product.stock > 0 ? (
-                    <span
-                      className={`stock-text ${product.stock <= 5 ? "stock-low" : "stock-ok"}`}
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill={favorites[product.id] ? "#e53e3e" : "none"}
+                      stroke={favorites[product.id] ? "#e53e3e" : "#ffffff"}
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     >
-                      {product.stock <= 5
-                        ? `Only ${product.stock} left`
-                        : `${product.stock} in stock`}
+                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                  </button>
+
+                  {product.hasDiscount && (
+                    <span className="discount-badge">
+                      -{getDiscountPercent(product.originalPrice, product.price)}%
                     </span>
-                  ) : (
-                    <span className="stock-text stock-none">Unavailable</span>
+                  )}
+
+                  {product.stock === 0 && (
+                    <span className="out-of-stock-badge">Out of Stock</span>
                   )}
                 </div>
+                <div className="product-info">
+                  <h3 className="product-name">{product.name}</h3>
+                  <p className="product-category">{product.category}</p>
+                  <p className="product-description">{product.description}</p>
 
-                <button
-                  className="add-to-cart-btn"
-                  disabled={product.stock === 0}
-                >
-                  {product.stock === 0 ? "Sold Out" : "Add to Cart"}
-                </button>
+                  <div className="product-price-row">
+                    <div className="price-group">
+                      <span className="product-price">
+                        ${product.price.toFixed(2)}
+                      </span>
+                      {product.hasDiscount && (
+                        <span className="product-original-price">
+                          ${product.originalPrice.toFixed(2)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="product-stock">
+                    {product.stock > 0 ? (
+                      <span
+                        className={`stock-text ${product.stock <= 5 ? "stock-low" : "stock-ok"}`}
+                      >
+                        {product.stock <= 5
+                          ? `Only ${product.stock} left`
+                          : `${product.stock} in stock`}
+                      </span>
+                    ) : (
+                      <span className="stock-text stock-none">Unavailable</span>
+                    )}
+                  </div>
+
+                  <button
+                    className="add-to-cart-btn"
+                    disabled={product.stock === 0}
+                  >
+                    {product.stock === 0 ? "Sold Out" : "Add to Cart"}
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
-  );
+  )
 }
