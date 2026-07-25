@@ -12,11 +12,11 @@ const SearchResult = ({ product }) => {
 
       <div className="context">
         <div className="result-meta">
-          {item.badge && <span className="badge">{item.badge}</span>}
+          {item.catagory && <span className="badge">{item.catagory}</span>}
         </div>
 
-        <h3 className="title">{item.title}</h3>
-        <h4 className="price">{item.price}</h4>
+        <h3 className="title">{item.name}</h3>
+        <h4 className="price">{item.price} $</h4>
         <p className="description">{item.description}</p>
         <button className="buy-btn">Add to cart</button>
       </div>

@@ -11,7 +11,6 @@ export  const useSearch =()=>{
     const context = useContext(SearchFunctionalContext)
     const {product , setProduct, loading , setLoading} = context
     useEffect(()=>{
-        console.log(product)
     },[product])
     const searchResultHandler = async ({name})=>{
         setLoading(true)
