@@ -1,7 +1,7 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
-const Product = require("./src/models/product.model");
-const productsData = require("./products");
+import "dotenv/config";
+import mongoose from "mongoose";
+import Product from "./src/models/product.model.js";
+import productsData from "./products.js";
 
 const seedDatabase = async () => {
   try {

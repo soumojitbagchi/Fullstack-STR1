@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const authmiddleware = async (req, res, next) => {
     try {
@@ -15,4 +15,4 @@ const authmiddleware = async (req, res, next) => {
     }
 }
 
-module.exports=authmiddleware
+export default authmiddleware;

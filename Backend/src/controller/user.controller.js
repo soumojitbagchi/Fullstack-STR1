@@ -1,4 +1,4 @@
-const user= require("../models/user.model")
+import user from "../models/user.model.js";
 
 const getMeController =async (req,res)=>{
     const decoded = req.user.id
@@ -16,4 +16,4 @@ const getMeController =async (req,res)=>{
     
 }
 
-module.exports={getMeController}
+export default {getMeController};

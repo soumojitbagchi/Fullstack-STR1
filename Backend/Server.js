@@ -1,9 +1,9 @@
-require("dotenv").config();
-const app = require("./src/app");
-const {createServer} = require('http')
-const {Server} = require('socket.io')
-const port =8080
-const connectToDB = require("./src/config/database");
+import "dotenv/config";
+import app from "./src/app.js";
+import { createServer } from 'http';
+import { Server } from 'socket.io';
+const port = 8080;
+import connectToDB from "./src/config/database.js";
 connectToDB();
 const httpServer = createServer(app)
 const io = new Server(httpServer,()=>{

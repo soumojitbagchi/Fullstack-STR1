@@ -1,11 +1,15 @@
-const express = require("express");
-const cookieParser = require("cookie-parser");
-const cors = require("cors");
-const path = require("path");
+import express from "express";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 const app = express();
-const authRoutes = require("./routes/auth.route");
-const productRoutes = require("./routes/product.route");
-const userRoutes = require("./routes/user.route");
+import authRoutes from "./routes/auth.route.js";
+import productRoutes from "./routes/product.route.js";
+import userRoutes from "./routes/user.route.js";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
@@ -18,4 +22,4 @@ app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/user", userRoutes);
 
-module.exports = app;
+export default app;

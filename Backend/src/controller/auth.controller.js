@@ -1,8 +1,8 @@
 
-const userData = require("../models/user.model");
-const jwt = require("jsonwebtoken");
-const cookie = require("cookie-parser");
-const bcrypt = require('bcryptjs')
+import userData from "../models/user.model.js";
+import jwt from "jsonwebtoken";
+import cookieParser from "cookie-parser";
+import bcrypt from 'bcryptjs';
 
 const registerController =  async (req, res) => {
   const { user, email, password } = req.body;
@@ -51,4 +51,4 @@ const loginController = async (req, res) => {
 }
 
 
-module.exports = {registerController,loginController}
+export default {registerController,loginController};

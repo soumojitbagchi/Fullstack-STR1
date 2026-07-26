@@ -1,5 +1,6 @@
-const imageKit= require("@imagekit/nodejs").default()
-const {toFile}= require('@imagekit/nodejs')
+import ImageKit from "@imagekit/nodejs";
+const imageKit = ImageKit.default();
+import { toFile } from '@imagekit/nodejs';
 
 const client = new imageKit({
     privateKey:process.env.IMAGEKIT_PRIVATE_KEY
@@ -13,4 +14,4 @@ const uploadFile=async (buffer , fileName, folder="")=>{
     })
     return file
 }
-module.exports=uploadFile
+export default uploadFile;

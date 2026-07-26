@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     "name": "Neon Cyber Jacket",
     "price": 129.99,
