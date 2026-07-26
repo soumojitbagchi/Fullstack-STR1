@@ -1,7 +1,4 @@
-import React from "react";
 import Home from "./firstInterface/pages/Home";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./firstInterface/components/navbar";
 import BackButton from "./firstInterface/components/BackButton";
@@ -16,8 +13,6 @@ import Feed from "./firstInterface/searchbar/pages/Feed";
 import DashboardHeader from "./firstInterface/pages/DashboardHeader";
 
 const AppRoutes = () => {
-  const navigate = useNavigate()
-
   return (
     <DashboardProvider>
       <Routes>

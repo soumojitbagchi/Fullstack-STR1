@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import aboutUs from "../pages/aboutUs";
 import "../Container.css"
 import { useAuth } from "../onClickingOutside/hooks/useDashboard";
 

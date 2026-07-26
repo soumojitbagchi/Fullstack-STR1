@@ -1,7 +1,6 @@
 
 import userData from "../models/user.model.js";
 import jwt from "jsonwebtoken";
-import cookieParser from "cookie-parser";
 import bcrypt from 'bcryptjs';
 
 const registerController =  async (req, res) => {

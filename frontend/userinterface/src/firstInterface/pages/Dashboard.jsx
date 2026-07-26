@@ -8,7 +8,6 @@ import {
 } from "../services/productApi";
 import { useSearch } from "../searchbar/Hooks/useSearch";
 import "./Dashboard.css";
-import OutsideDashBoard from "../onClickingOutside/pages/OutsideDashBoard";
 import DashboardHeader from "./DashboardHeader";
 
 export default function Dashboard() {

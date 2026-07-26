@@ -1,7 +1,6 @@
 import React from 'react'
 import { useAuthActions } from '../../../hooks/useAuth'
 import { useAuth } from '../hooks/useDashboard'
-import Dashboard from '../../pages/Dashboard'
 import './OutsideDashBoard.css'
 
 const OutsideDashBoard = () => {
