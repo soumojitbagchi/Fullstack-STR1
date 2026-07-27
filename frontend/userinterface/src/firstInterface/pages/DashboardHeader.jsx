@@ -2,9 +2,12 @@ import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
 import { useSearch } from "../searchbar/Hooks/useSearch";
 import { useNavigate } from "react-router-dom";
+import OutsideDashBoard from "../onClickingOutside/pages/OutsideDashBoard";
+import { useAuth as useDashboardAuth } from "../onClickingOutside/hooks/useDashboard";
 
 const DashboardHeader = () => {
     const { user, setLoading } = useAuth();
+    const { open, setOpen } = useDashboardAuth();
     const { searchResultHandler } = useSearch();
     const [search, setSearch] = useState("");
     const navigate = useNavigate()
@@ -23,7 +26,13 @@ const DashboardHeader = () => {
     return (
         <header className="dashboard-header">
             <div className="dashboard-header-left">
-                <h1 className="dashboard-title">Products</h1>
+                <div className="site-title">
+                    <h1 className="dashboard-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" /><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" /></svg>
+                        BonGaZon<span className="domain-suffix">.in</span>
+                    </h1>
+                </div>
+
                 <span className="dashboard-welcome">Welcome, {user.name}</span>
             </div>
             <div className="dashboard-component-right">
@@ -50,13 +59,15 @@ const DashboardHeader = () => {
                     </button>
                 </div>
 
-                <div className="dashboard-outside">
+                <div className="dashboard-outside" style={{ cursor: 'pointer' }} onClick={() => setOpen(!open)}>
                     <img
                         src="https://imgs.search.brave.com/aX7CEgdsXcExaNXt5jLIa8--8k0utAjO33xcdugux44/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9kcmVh/bXBmcC5jb20vd3At/Y29udGVudC91cGxv/YWRzLzIwMjYvMDUv/RGVmYXVsdC1QZnAt/Ym95LTIud2VicA"
-                        alt=""
+                        alt="Profile"
                     />
                 </div>
             </div>
+
+            <OutsideDashBoard />
         </header>
     );
 };

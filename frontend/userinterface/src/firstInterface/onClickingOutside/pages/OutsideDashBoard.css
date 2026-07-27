@@ -1,9 +1,9 @@
 .dashboard-menu {
   position: fixed;
   top: 0;
-  right: 0;
+  right: 30px;
   width: 340px;
-  height: 100vh;
+  height: 85vh;
   z-index: 1000;
 
   /* Glassmorphism panel */
