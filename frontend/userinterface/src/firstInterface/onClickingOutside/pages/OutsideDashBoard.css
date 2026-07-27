@@ -45,31 +45,6 @@
   z-index: 2;
 }
 
-/* ---- Open / Close state toggle ---- */
-.dashboard-menu.close,
-.dashboard-menu[data-state="closed"] {
-  transform: translateX(110%);
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease,
-    visibility 0s 0.4s;
-  /* delay visibility until animation finishes */
-}
-
-.dashboard-menu.open,
-.dashboard-menu[data-state="open"] {
-  transform: translateX(0%);
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease,
-    visibility 0s 0s;
-}
 
 /* ---------- Close / Toggle Button ---------- */
 .function-button {
@@ -113,14 +88,6 @@
   transform: scale(0.94);
 }
 
-/* Visually-hidden when "open" state class is on button itself */
-.function-button.open {
-  opacity: 1;
-}
-
-.function-button.close {
-  opacity: 0.5;
-}
 
 /* ---------- Profile Section ---------- */
 .profile-image {
@@ -354,15 +321,7 @@
     visibility 0s 0s;
 }
 
-.dashboard-overlay.hidden,
-.dashboard-overlay[data-state="hidden"] {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition:
-    opacity 0.35s ease,
-    visibility 0s 0.35s;
-}
+
 
 /* ---------- Scrollbar ---------- */
 .dashboard-menu::-webkit-scrollbar {
@@ -381,10 +340,7 @@
 .dashboard-menu::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
-.hidden{
-  z-index: 20;
-  position: relative;
-}
+
 
 /* ---------- Responsive ---------- */
 @media (max-width: 480px) {

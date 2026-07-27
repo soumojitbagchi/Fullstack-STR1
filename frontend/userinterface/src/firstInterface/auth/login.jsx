@@ -25,6 +25,7 @@ const login = () => {
       const response = await axios.post(
         "http://localhost:8080/api/auth/login",
         { email, password },
+        { withCredentials: true }
       );
       authLogin(response.data.token);  // saves to localStorage + updates context
       navigate("/dashboard");

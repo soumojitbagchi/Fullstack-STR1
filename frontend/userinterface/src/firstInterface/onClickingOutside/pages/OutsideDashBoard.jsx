@@ -17,26 +17,26 @@ const OutsideDashBoard = () => {
     <>
       {/* Backdrop overlay — closes sidebar on click */}
       <div
-        className={`dashboard-overlay ${!open ? 'hidden' : ''}`}
+        className="dashboard-overlay"
+        style={{ display: open ? 'block' : 'none' }}
         onClick={changeOpen}
         role="presentation"
         aria-hidden={!open}
-        data-state={open ? 'visible' : 'hidden'}
       />
 
       {/* Sidebar drawer */}
       <div
-        className={`dashboard-menu ${open ? 'open' : 'close'}`}
+        className="dashboard-menu"
+        style={{ display: open ? 'flex' : 'none' }}
         role="dialog"
         aria-label="User sidebar"
         aria-hidden={!open}
-        data-state={open ? 'open' : 'closed'}
         tabIndex={open ? 0 : -1}
       >
         {/* Close button */}
         <button
           onClick={changeOpen}
-          className={`function-button ${open ? 'open' : 'close'}`}
+          className="function-button"
           aria-label="Close sidebar"
           tabIndex={open ? 0 : -1}
         >
