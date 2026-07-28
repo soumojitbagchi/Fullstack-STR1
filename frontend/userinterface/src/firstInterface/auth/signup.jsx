@@ -6,7 +6,7 @@ import "../Container.css";
 import { VscEyeClosed } from "react-icons/vsc";
 import { VscEye } from "react-icons/vsc";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
 
@@ -17,11 +17,11 @@ const signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { login: authLogin } = useAuth();
   const navigate = useNavigate();
-  const submitHandeler =async (e) => {
+  const submitHandeler = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:8080/api/auth/register",
-        {user, email, password},
+        { user, email, password },
         { withCredentials: true }
       )
       authLogin(response.data.token);  // saves to localStorage + updates context
@@ -50,7 +50,7 @@ const signup = () => {
             name="email"
             value={user}
             onChange={(e) => setUser(e.target.value)}
-            placeholder="enter your user  "
+            placeholder="Enter username"
           />
           <input
             type="email"
@@ -58,21 +58,28 @@ const signup = () => {
             name="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="enter email"
+            placeholder="Enter email"
           />
-          <div className="logIn-input flex justify-between">
+          <div className="logIn-input relative flex items-center justify-center">
             <input
-              className=" text-center justify-center w-[43vw] outline-0"
+              className="w-full h-full bg-transparent text-center outline-none text-white px-10"
               type={showPassword ? "text" : "password"}
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="enter password"
-            ></input>
-            <motion.button onClick={previewChanger} type="button" className=" text-3xl">
+              placeholder="Enter password"
+            />
+            <motion.button
+              onClick={previewChanger}
+              type="button"
+              className="absolute right-3 text-2xl text-gray-300 hover:text-white flex items-center justify-center border-none bg-transparent cursor-pointer"
+            >
               {showPassword ? <VscEye /> : <VscEyeClosed />}
             </motion.button>
           </div>
+          <p className="auth-redirect-text">
+            Already have an account? <Link to="/login">Login here</Link>
+          </p>
         </div>
 
         <motion.button

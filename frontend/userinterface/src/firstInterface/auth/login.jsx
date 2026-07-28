@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import ThreeBackground from "../background/ThreeBackground";
 import { motion } from "framer-motion";
 import "../Container.css";
@@ -56,19 +56,27 @@ const login = () => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="enter your registered email"
           />
-          <div className="logIn-input flex justify-between">
+          <div className="logIn-input relative flex items-center justify-center">
             <input
-              className=" text-center justify-center w-[43vw] outline-0"
+              className="w-full h-full bg-transparent text-center outline-none text-white px-10"
               type={showPassword ? "text" : "password"}
               name="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="enter password"
-            ></input>
-            <motion.button onClick={previewChanger} type="button" className=" text-3xl">
+              placeholder="Enter password"
+            />
+            <motion.button
+              onClick={previewChanger}
+              type="button"
+              className="absolute right-3 text-2xl text-gray-300 hover:text-white flex items-center justify-center border-none bg-transparent cursor-pointer"
+            >
               {showPassword ? <VscEye /> : <VscEyeClosed />}
             </motion.button>
           </div>
+          <p className="auth-redirect-text">
+            Haven't registered yet? <Link to="/signup">Register here</Link>
+          </p>
+
         </div>
 
         <motion.button
