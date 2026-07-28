@@ -11,6 +11,7 @@ import ProtectedRoute from "./firstInterface/components/ProtectedRoute";
 import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.context";
 import Feed from "./firstInterface/searchbar/pages/Feed";
 import DashboardHeader from "./firstInterface/pages/DashboardHeader";
+import UserProfile from "./firstInterface/onClickingOutside/pages/UserProfile";
 
 const AppRoutes = () => {
   return (
@@ -61,6 +62,14 @@ const AppRoutes = () => {
           }
         />
         <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/search"
           element={
             <>
@@ -74,3 +83,4 @@ const AppRoutes = () => {
   );
 };
 export default AppRoutes;
+

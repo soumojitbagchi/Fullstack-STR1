@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchResult from './SearchReasult'
-import '../style/SearchReasult.css'
+import '../style/SearchResult.css'
 import { useSearch } from '../Hooks/useSearch'
 
 const Feed = () => {

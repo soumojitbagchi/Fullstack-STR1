@@ -1,5 +1,5 @@
 import React from 'react'
-import '../style/SearchReasult.css'
+import '../style/SearchResult.css'
 
 const SearchResult = ({ product }) => {
   const item = product
@@ -12,7 +12,7 @@ const SearchResult = ({ product }) => {
 
       <div className="context">
         <div className="result-meta">
-          {item.catagory && <span className="badge">{item.catagory}</span>}
+          {item.category && <span className="badge">{item.category}</span>}
         </div>
 
         <h3 className="title">{item.name}</h3>
