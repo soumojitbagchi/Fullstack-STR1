@@ -18,6 +18,17 @@ connectToDB();
 // httpServer.listen(port, () => {
 //   console.log("connect to 8080"); 
 // });
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log("connect to the port")
 })
+
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Port ${port} is already in use!`);
+    process.exit(1);
+  }
+  throw err;
+});
+
+process.on('SIGINT', () => server.close(() => process.exit(0)));
+process.once('SIGUSR2', () => server.close(() => process.kill(process.pid, 'SIGUSR2')));
