@@ -12,6 +12,7 @@ import { DashboardProvider } from "./firstInterface/onClickingOutside/dashboard.
 import Feed from "./firstInterface/searchbar/pages/Feed";
 import DashboardHeader from "./firstInterface/pages/DashboardHeader";
 import UserProfile from "./firstInterface/onClickingOutside/pages/UserProfile";
+import UserOrder from "./firstInterface/onClickingOutside/pages/UserOrder";
 
 const AppRoutes = () => {
   return (
@@ -66,6 +67,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <UserProfile />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <ProtectedRoute>
+              <UserOrder />
             </ProtectedRoute>
           }
         />
