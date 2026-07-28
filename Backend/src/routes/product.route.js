@@ -10,4 +10,5 @@ productRoutes.get(
 );
 productRoutes.get("/search", productController.getResults);
 
+
 export default productRoutes;
