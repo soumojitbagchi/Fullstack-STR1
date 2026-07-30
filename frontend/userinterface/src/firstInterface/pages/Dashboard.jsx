@@ -20,6 +20,7 @@ export default function Dashboard() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState({});
+  const [cartAdded, setCartAdded] = useState({});
   const [openSideBar, setopenSideBar] = useState(false);
   const [search, setSearch] = useState("");
   const navigate = useNavigate()
@@ -108,8 +109,15 @@ export default function Dashboard() {
                   />
 
                   <button
-                    className="love-btn"
-                    onClick={() => toggleFavorite(productId)}
+                    className={`love-btn ${favorites[productId] ? "love-btn-clicked" : ""}`}
+                    onClick={(e) => {
+                      toggleFavorite(productId);
+                      const btn = e.currentTarget;
+                      btn.classList.remove("love-btn-clicked");
+                      void btn.offsetWidth;
+                      btn.classList.add("love-btn-clicked");
+                      setTimeout(() => btn.classList.remove("love-btn-clicked"), 1500);
+                    }}
                     aria-label={
                       favorites[productId]
                         ? "Remove from favorites"
@@ -120,8 +128,8 @@ export default function Dashboard() {
                       width="24"
                       height="24"
                       viewBox="0 0 24 24"
-                      fill={favorites[product.id] ? "#e53e3e" : "none"}
-                      stroke={favorites[product.id] ? "#e53e3e" : "#ffffff"}
+                      fill={favorites[productId] ? "#e53e3e" : "none"}
+                      stroke={favorites[productId] ? "#e53e3e" : "#ffffff"}
                       strokeWidth="2"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -143,7 +151,11 @@ export default function Dashboard() {
                 <div className="product-info">
                   <h3 className="product-name">{product.name}</h3>
                   <p className="product-category">{product.category}</p>
-                  <p className="product-description">{product.description}</p>
+                  <p className="product-description">
+                    {product.description.split(" ").length > 15
+                      ? product.description.split(" ").slice(0, 15).join(" ") + "..."
+                      : product.description}
+                  </p>
 
                   <div className="product-price-row">
                     <div className="price-group">
@@ -173,15 +185,28 @@ export default function Dashboard() {
                   </div>
 
                   <button
-                    className="add-to-cart-btn"
-                    disabled={product.stock === 0}
-                    onClick={() => {
+                    className={`add-to-cart-btn ${cartAdded[productId] ? "cart-added" : ""}`}
+                    disabled={product.stock === 0 || cartAdded[productId]}
+                    onClick={(e) => {
                       if (product.stock > 0) {
                         handleAddToCart(productId);
+                        setCartAdded((prev) => ({ ...prev, [productId]: true }));
+                        const btn = e.currentTarget;
+                        btn.classList.remove("cart-added");
+                        void btn.offsetWidth;
+                        btn.classList.add("cart-added");
+                        setTimeout(() => {
+                          setCartAdded((prev) => ({ ...prev, [productId]: false }));
+                          btn.classList.remove("cart-added");
+                        }, 1500);
                       }
                     }}
                   >
-                    {product.stock === 0 ? "Sold Out" : "Add to Cart"}
+                    {product.stock === 0
+                      ? "Sold Out"
+                      : cartAdded[productId]
+                        ? "Added ✓"
+                        : "Add to Cart"}
                   </button>
                 </div>
               </div>

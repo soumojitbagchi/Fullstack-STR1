@@ -158,6 +158,13 @@ const UserCart = () => {
             {/* Item Details */}
             <div className="cart-item-details">
               <span className="cart-item-name">{item.product?.name || "Unknown Product"}</span>
+              {item.product?.description && (
+                <p className="cart-item-description">
+                  {item.product.description.split(" ").length > 15
+                    ? item.product.description.split(" ").slice(0, 15).join(" ") + "..."
+                    : item.product.description}
+                </p>
+              )}
               <div className="cart-item-meta">
                 {item.quantity && (
                   <span className="cart-item-qty-badge">Qty: {item.quantity}</span>
@@ -170,15 +177,13 @@ const UserCart = () => {
 
             {/* Item Price */}
             <div className="cart-item-price-section">
-              {item.product?.originalPrice ? (
+              {item.product?.hasDiscount && item.product?.originalPrice ? (
                 <>
-                  <span className="cart-item-total-price">${Number(item.product?.originalPrice).toFixed(2)}</span>
-                  {item.quantity > 1 && (
-                    <span className="cart-item-unit-price">${Number(item.product?.price).toFixed(2)} each</span>
-                  )}
+                  <span className="cart-item-original-price">${Number(item.product.originalPrice).toFixed(2)}</span>
+                  <span className="cart-item-discounted-price">${Number(item.product.price).toFixed(2)}</span>
                 </>
               ) : (
-                <span className="cart-item-total-price">${Number(item.product?.price || 0).toFixed(2)}</span>
+                <span className="cart-item-discounted-price">${Number(item.product?.price || 0).toFixed(2)}</span>
               )}
             </div>
 

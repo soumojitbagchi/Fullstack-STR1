@@ -1425,20 +1425,39 @@
   text-transform: capitalize;
 }
 
+/* Item Description (truncated) */
+.cart-item-description {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.4);
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+}
+
 /* Item Price */
 .cart-item-price-section {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 3px;
+  gap: 4px;
   flex-shrink: 0;
-  min-width: 80px;
+  min-width: 90px;
 }
 
-.cart-item-total-price {
-  font-size: 16px;
+.cart-item-original-price {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.35);
+  text-decoration: line-through;
+  text-decoration-color: rgba(239, 68, 68, 0.6);
+  text-decoration-thickness: 1.5px;
+}
+
+.cart-item-discounted-price {
+  font-size: 17px;
   font-weight: 700;
-  color: #fff;
+  color: #6ee7b7;
+  letter-spacing: -0.3px;
 }
 
 .cart-item-unit-price {

@@ -219,6 +219,8 @@
   border-radius: 12px;
   overflow: hidden;
   transition: border-color 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-card:hover {
@@ -256,7 +258,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.3s;
 }
 
 .love-btn:hover {
@@ -266,6 +268,37 @@
 
 .love-btn:active {
   transform: scale(0.9);
+}
+
+.love-btn.love-btn-clicked {
+  animation: heartPop 1.5s ease forwards;
+}
+
+@keyframes heartPop {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(229, 62, 62, 0);
+  }
+  15% {
+    transform: scale(1.4);
+    box-shadow: 0 0 20px rgba(229, 62, 62, 0.5);
+  }
+  30% {
+    transform: scale(0.9);
+    box-shadow: 0 0 10px rgba(229, 62, 62, 0.3);
+  }
+  45% {
+    transform: scale(1.15);
+    box-shadow: 0 0 14px rgba(229, 62, 62, 0.25);
+  }
+  60% {
+    transform: scale(1);
+    box-shadow: 0 0 8px rgba(229, 62, 62, 0.15);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(229, 62, 62, 0);
+  }
 }
 
 .discount-badge {
@@ -295,6 +328,9 @@
 
 .product-info {
   padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-name {
@@ -316,12 +352,14 @@
   color: #999;
   line-height: 1.5;
   margin: 0 0 14px;
+  flex-shrink: 0;
 }
 
 .product-price-row {
   display: flex;
   align-items: center;
   margin-bottom: 8px;
+  margin-top: auto;
 }
 
 .price-group {
@@ -372,7 +410,9 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .add-to-cart-btn:hover {
@@ -383,6 +423,56 @@
   background: #333;
   color: #666;
   cursor: not-allowed;
+}
+
+/* Instagram-style "Added" state */
+.add-to-cart-btn.cart-added {
+  animation: cartBtnPop 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: #10b981;
+  color: #fff;
+}
+
+@keyframes cartBtnPop {
+  0% {
+    transform: scale(1);
+  }
+  12% {
+    transform: scale(0.88);
+  }
+  28% {
+    transform: scale(1.06);
+  }
+  44% {
+    transform: scale(0.97);
+  }
+  60% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Ripple burst on click */
+.add-to-cart-btn.cart-added::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, transparent 70%);
+  animation: cartRipple 0.6s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes cartRipple {
+  0% {
+    opacity: 1;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(2);
+  }
 }
 
 @media (max-width: 640px) {
