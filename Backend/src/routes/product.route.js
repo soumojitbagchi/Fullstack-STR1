@@ -3,10 +3,10 @@ const productRoutes = express.Router();
 import productController from "../controller/product.controller.js";
 
 productRoutes.get("/", productController.getAllProducts);
-productRoutes.get("/catagories", productController.getCatagories);
+productRoutes.get("/categories", productController.getCategories);
 productRoutes.get(
-  "/catagory/:catagory",
-  productController.getProductsByCatagory,
+  "/category/:category",
+  productController.getProductsByCategory,
 );
 productRoutes.get("/search", productController.getResults);
 
