@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAuthActions } from '../../../hooks/useAuth'
-import { useAuth } from '../hooks/useDashboard'
+import { useSearch } from '../hooks/useDashboard'
 import './OutsideDashBoard.css'
 import { useNavigate } from 'react-router-dom'
 
@@ -11,7 +11,7 @@ const OutsideDashBoard = () => {
     handleLogout()
     navigate('/login')
   }
-  const { open, setOpen } = useAuth()
+  const { open, setOpen } = useSearch()
   const changeOpen = () => {
     setOpen(!open)
   }

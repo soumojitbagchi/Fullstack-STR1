@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useDashboard";
+import { useSearch } from "../hooks/useDashboard";
 import "./OutsideDashBoard.css";
 
 const UserCart = () => {
@@ -13,7 +13,7 @@ const UserCart = () => {
     setOpen,
     handleGetAllCartItems,
     handleRemoveFromCart,
-  } = useAuth();
+  } = useSearch();
 
   useEffect(() => {
     handleGetAllCartItems();
@@ -23,7 +23,7 @@ const UserCart = () => {
   const cartItems = product || [];
   const totalItems = cartItems.reduce((sum, item) => sum + (item.quantity || 1), 0);
   const subtotal = cartItems.reduce(
-    (sum, item) => sum + (item.totalPrice || item.price || 0),
+    (sum, item) => sum + (item.product?.totalPrice || item.product?.price || 0),
     0
   );
 
@@ -60,7 +60,7 @@ const UserCart = () => {
           </div>
           <h2 className="cart-empty-title">Your cart is empty</h2>
           <p className="cart-empty-subtitle">Looks like you haven't added anything yet.</p>
-          <button className="cart-shop-btn" onClick={() => navigate("/")}>
+          <button className="cart-shop-btn" onClick={() => navigate("/dashboard")}>
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polyline points="15 18 9 12 15 6" />
             </svg>
@@ -142,8 +142,8 @@ const UserCart = () => {
           <div className="cart-item-card" key={item.id || idx}>
             {/* Item Image */}
             <div className="cart-item-image-wrapper">
-              {item.image ? (
-                <img src={item.image} alt={item.name} className="cart-item-image" />
+              {item.product ? (
+                <img src={item.product.image} alt={item.product.name} className="cart-item-image" />
               ) : (
                 <div className="cart-item-image-placeholder">
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -157,36 +157,36 @@ const UserCart = () => {
 
             {/* Item Details */}
             <div className="cart-item-details">
-              <span className="cart-item-name">{item.name}</span>
+              <span className="cart-item-name">{item.product?.name || "Unknown Product"}</span>
               <div className="cart-item-meta">
                 {item.quantity && (
                   <span className="cart-item-qty-badge">Qty: {item.quantity}</span>
                 )}
-                {item.category && (
-                  <span className="cart-item-category">{item.category}</span>
+                {item.product?.category && (
+                  <span className="cart-item-category">{item.product?.category}</span>
                 )}
               </div>
             </div>
 
             {/* Item Price */}
             <div className="cart-item-price-section">
-              {item.totalPrice ? (
+              {item.product?.originalPrice ? (
                 <>
-                  <span className="cart-item-total-price">${Number(item.totalPrice).toFixed(2)}</span>
+                  <span className="cart-item-total-price">${Number(item.product?.originalPrice).toFixed(2)}</span>
                   {item.quantity > 1 && (
-                    <span className="cart-item-unit-price">${Number(item.price).toFixed(2)} each</span>
+                    <span className="cart-item-unit-price">${Number(item.product?.price).toFixed(2)} each</span>
                   )}
                 </>
               ) : (
-                <span className="cart-item-total-price">${Number(item.price || 0).toFixed(2)}</span>
+                <span className="cart-item-total-price">${Number(item.product?.price || 0).toFixed(2)}</span>
               )}
             </div>
 
             {/* Remove Button */}
             <button
               className="cart-item-remove-btn"
-              onClick={() => handleRemoveFromCart(item.id)}
-              aria-label={`Remove ${item.name} from cart`}
+              onClick={async () => await handleRemoveFromCart(item._id) & await handleGetAllCartItems()}
+              aria-label={`Remove ${item.product?.name} from cart`}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="3 6 5 6 21 6" />

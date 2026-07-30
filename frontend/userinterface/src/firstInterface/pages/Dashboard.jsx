@@ -7,12 +7,14 @@ import {
   fetchProductsByCategory,
 } from "../services/productApi";
 import { useSearch } from "../searchbar/Hooks/useSearch";
+import {useDashboard} from "../onClickingOutside/hooks/useDashboard"
 import "./Dashboard.css";
 import DashboardHeader from "./DashboardHeader";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
   const { searchResultHandler } = useSearch();
+  const { handleAddToCart } = useDashboard();
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState("all");
@@ -173,6 +175,11 @@ export default function Dashboard() {
                   <button
                     className="add-to-cart-btn"
                     disabled={product.stock === 0}
+                    onClick={() => {
+                      if (product.stock > 0) {
+                        handleAddToCart(productId);
+                      }
+                    }}
                   >
                     {product.stock === 0 ? "Sold Out" : "Add to Cart"}
                   </button>

@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useSearch } from "../searchbar/Hooks/useSearch";
 import { useNavigate } from "react-router-dom";
 import OutsideDashBoard from "../onClickingOutside/pages/OutsideDashBoard";
-import { useAuth as useDashboardAuth } from "../onClickingOutside/hooks/useDashboard";
+import { useSearch as useDashboardSearch } from "../onClickingOutside/hooks/useDashboard";
 
 const DashboardHeader = () => {
     const { user, setLoading } = useAuth();
-    const { open, setOpen } = useDashboardAuth();
+    const { open, setOpen } = useDashboardSearch();
     const { searchResultHandler } = useSearch();
     const [search, setSearch] = useState("");
     const navigate = useNavigate()

@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../Container.css"
-import { useAuth } from "../onClickingOutside/hooks/useDashboard";
+import { useSearch } from "../onClickingOutside/hooks/useDashboard";
 
 const Navbar = () => {
-  const { open, setOpen } = useAuth();
+  const { open, setOpen } = useSearch();
 
   const toggleDropdown = () => {
     setOpen(!open);

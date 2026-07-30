@@ -2,7 +2,7 @@ import { useContext ,useState} from "react";
 import { DashboardContext} from "../dashboard.context";
 import {addToCart , getAllCartItems , removeFromCart} from "../services/dashBoard.api";
 
-export const useAuth =()=>{
+export const useSearch =()=>{
     const context = useContext(DashboardContext)
     const {open , setOpen, loading, setLoading, product, setProduct} = context
     if(!context){
@@ -60,3 +60,5 @@ export const useAuth =()=>{
         handleRemoveFromCart
     }
 }
+
+export const useDashboard = useSearch;
