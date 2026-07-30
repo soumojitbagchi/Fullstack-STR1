@@ -13,6 +13,7 @@ import Feed from "./firstInterface/searchbar/pages/Feed";
 import DashboardHeader from "./firstInterface/pages/DashboardHeader";
 import UserProfile from "./firstInterface/onClickingOutside/pages/UserProfile";
 import UserOrder from "./firstInterface/onClickingOutside/pages/UserOrder";
+import UserCart from "./firstInterface/onClickingOutside/pages/UserCart";
 
 const AppRoutes = () => {
   return (
@@ -75,6 +76,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <UserOrder />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <ProtectedRoute>
+              <UserCart />
             </ProtectedRoute>
           }
         />
