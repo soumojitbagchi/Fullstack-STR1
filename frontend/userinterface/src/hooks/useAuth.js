@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../firstInterface/context/AuthContext';
+import { useAuth } from '../firstInterface/auth/hooks/useAuth';
 import { loginUser, registerUser } from '../api/authApi';
 
 export const useAuthActions = () => {

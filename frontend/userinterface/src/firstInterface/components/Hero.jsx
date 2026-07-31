@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../auth/hooks/useAuth';
 import Badge from './Badge';
 import ThreeBackground from '../background/ThreeBackground';
 

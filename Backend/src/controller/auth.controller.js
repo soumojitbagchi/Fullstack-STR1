@@ -67,6 +67,7 @@ const loginController = async (req, res) => {
       process.env.JWT_KEY,
       { expiresIn: "3h" },
     );
+    
     res.cookie("token", token);
     res.status(201).json({ message: "Login successful", token });
   } catch (error) {

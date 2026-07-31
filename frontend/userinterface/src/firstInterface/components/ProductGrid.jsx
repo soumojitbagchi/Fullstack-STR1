@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { fetchAllProducts, fetchCategories, fetchProductsByCategory } from '../services/productApi';
 import ProductCard from './ProductCard';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../auth/hooks/useAuth';
 
 const containerVariants = {
   hidden: { opacity: 0 },
