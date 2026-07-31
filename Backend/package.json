@@ -13,6 +13,9 @@
   "license": "ISC",
   "dependencies": {
     "@imagekit/nodejs": "^7.10.0",
+    "@langchain/core": "^1.2.4",
+    "@langchain/google": "^0.2.1",
+    "@langchain/google-genai": "^2.2.0",
     "bcryptjs": "^3.0.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
@@ -20,6 +23,7 @@
     "express": "^5.2.1",
     "express-validator": "^7.3.2",
     "jsonwebtoken": "^9.0.3",
+    "langchain": "^1.5.4",
     "mongoose": "^9.7.0",
     "multer": "^2.2.0",
     "nodemailer": "^9.0.3",
