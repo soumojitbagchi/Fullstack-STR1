@@ -8,27 +8,19 @@ import { VscEye } from "react-icons/vsc";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../auth/hooks/useAuth";
 
 const signup = () => {
   const [email, setEmail] = useState("");
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { login: authLogin } = useAuth();
+  const { registerUser } = useAuth();
   const navigate = useNavigate();
-  const submitHandeler = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post("http://localhost:8080/api/auth/register",
-        { user, email, password },
-        { withCredentials: true }
-      )
-      authLogin(response.data.token);  // saves to localStorage + updates context
-      navigate("/");
-    } catch (error) {
-      console.log(error)
-    }
+    await registerUser({ user, email, password });
+    navigate("/dashboard");
   };
   const previewChanger = (e) => {
     setShowPassword((prev) => !prev);
@@ -40,7 +32,7 @@ const signup = () => {
       <BackButton />
       <form
         action=""
-        onSubmit={submitHandeler}
+        onSubmit={submitHandler}
         style={{ position: "relative", zIndex: 1 }}
       >
         <div className="main-input">
@@ -86,7 +78,7 @@ const signup = () => {
           className="active"
           whileTap={{ scale: 0.9 }}
           whileHover={{ backgroundColor: "green" }}
-          onSubmit={submitHandeler}
+          onSubmit={submitHandler}
           type="submit"
         >
           SignUp

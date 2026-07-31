@@ -7,33 +7,27 @@ import "../Container.css";
 import axios from "axios";
 import { VscEyeClosed } from "react-icons/vsc";
 import { VscEye } from "react-icons/vsc";
-import { useAuth } from "../context/AuthContext";
+import { useAuth } from "../auth/hooks/useAuth";
 
 const login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { login: authLogin } = useAuth();
+  const { loginUser } = useAuth();
   const navigate = useNavigate();
   const previewChanger = (e) => {
     setShowPassword((prev) => !prev);
     e.preventDefault();
   };
-  const submitHandeler = async (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        { email, password },
-        { withCredentials: true }
-      );
-      authLogin(response.data.token);  // saves to localStorage + updates context
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+    await loginUser({ email, password });
+    navigate("/dashboard");
+    setEmail("");
+    setPassword("");
   };
-  return (
+  
+    return (
     <div
       style={{
         position: "relative",
@@ -44,7 +38,7 @@ const login = () => {
       <ThreeBackground />
       <form
         action=""
-        onSubmit={submitHandeler}
+        onSubmit={submitHandler}
         style={{ position: "relative", zIndex: 1 }}
       >
         <div className="main-input">
