@@ -2,7 +2,7 @@ import apiClient from '../../api/apiClient';
 
 export const fetchCategories = async () => {
   try {
-    const response = await apiClient.get('/products/catagories');
+    const response = await apiClient.get('/products/categories');
     return response.data;
   } catch (error) {
     console.error('Error fetching categories from API:', error);
@@ -22,7 +22,7 @@ export const fetchAllProducts = async () => {
 
 export const fetchProductsByCategory = async (category) => {
   try {
-    const response = await apiClient.get(`/products/catagory/${encodeURIComponent(category)}`);
+    const response = await apiClient.get(`/products/category/${encodeURIComponent(category)}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching products by category from API:', error);

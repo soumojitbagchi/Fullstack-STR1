@@ -9,4 +9,5 @@ userRoutes.get("/getme", authMiddleware, userController.getMeController);
 userRoutes.get("/cart", authMiddleware, productController.getCart);
 userRoutes.post("/cart/:productId", authMiddleware, productController.addProductToCart);
 userRoutes.delete("/cart/:productId", authMiddleware, productController.removeFromCart);
+userRoutes.post("/order-checkout", authMiddleware, productController.orderCheckOut);
 export default userRoutes;

@@ -33,6 +33,26 @@ const userSchema = new mongoose.Schema({
     ],
     default: [],
   },
+  order: {
+    type: [
+      {
+        product: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "products",
+        },
+        quantity: {
+          type: Number,
+          default: 1,
+        },
+        status: {
+          type: String,
+          enum: ["pending", "shipped", "delivered"],
+          default: "pending",
+        },
+      },
+    ],
+    default: [],
+  },
 });
 const userData = mongoose.model("users", userSchema);
 export default userData;

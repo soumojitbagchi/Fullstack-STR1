@@ -14,6 +14,7 @@ import DashboardHeader from "./firstInterface/pages/DashboardHeader";
 import UserProfile from "./firstInterface/onClickingOutside/pages/UserProfile";
 import UserOrder from "./firstInterface/onClickingOutside/pages/UserOrder";
 import UserCart from "./firstInterface/onClickingOutside/pages/UserCart";
+import OrderCheckBox from "./firstInterface/onClickingOutside/pages/OrderCheckBox";
 
 const AppRoutes = () => {
   return (
@@ -84,6 +85,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <UserCart />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <ProtectedRoute>
+              <OrderCheckBox />
             </ProtectedRoute>
           }
         />

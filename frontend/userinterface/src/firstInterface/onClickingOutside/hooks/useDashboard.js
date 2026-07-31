@@ -1,10 +1,10 @@
 import { useContext ,useState} from "react";
 import { DashboardContext} from "../dashboard.context";
-import {addToCart , getAllCartItems , removeFromCart} from "../services/dashBoard.api";
+import {addToCart , getAllCartItems , removeFromCart , orderCheckOut} from "../services/dashBoard.api";
 
 export const useSearch =()=>{
     const context = useContext(DashboardContext)
-    const {open , setOpen, loading, setLoading, product, setProduct} = context
+    const {open , setOpen, loading, setLoading, product, setProduct ,orderList, setOrderList} = context
     if(!context){
         console.log("create a context first ")
     }
@@ -52,12 +52,26 @@ export const useSearch =()=>{
         }
       };
     
-
+      const handleOrderCheckOut = async () => {
+        setLoading(true);
+        try {
+          const orderData = await orderCheckOut();
+          console.log(orderData);
+          setOrderList(orderData.products || []);
+          // Optionally, you can update the cart state here if needed
+        } catch (error) {
+          console.error("Error placing order:", error);
+        }finally {
+          setLoading(false);
+        }
+      };
     return {
         open , loading, setOpen,product, setProduct,
+        orderList, setOrderList,
         handleAddToCart,
         handleGetAllCartItems,
-        handleRemoveFromCart
+        handleRemoveFromCart,
+        handleOrderCheckOut
     }
 }
 

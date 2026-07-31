@@ -16,7 +16,7 @@ const getProductsByCategory = async (req, res) => {
   try {
     const { category } = req.params;
     const products = await Product.find({ category: category });
-    res.status(200).json(products);
+    res.status(200).json({ products });
   } catch (error) {
     res
       .status(500)
@@ -96,6 +96,27 @@ const removeFromCart = async (req, res) => {
     res.status(500).json({ message: "Failed to remove product from cart", error: error.message });
   }
 };
+const orderCheckOut = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const user = await User.findById(userId).populate("cart.product");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const order = {
+      products: user.cart,
+      totalAmount: user.cart.reduce((total, item) => total + item.product.price * item.quantity, 0),
+      orderDate: new Date(),
+    };
+    user.order.push(order);
+    user.cart = [];
+    await user.save();
+    res.status(200).json({ message: "Order placed successfully", order: order });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to place order", error: error.message });
+  }
+};
+
 export default {
   getAllProducts,
   getProductsByCategory,
@@ -103,5 +124,6 @@ export default {
   getResults,
   getCart,
   removeFromCart,
-  addProductToCart
+  addProductToCart,
+  orderCheckOut
 };

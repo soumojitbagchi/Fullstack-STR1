@@ -35,4 +35,14 @@ const removeFromCart = async (productId) => {
   }
 };
 
-export { getAllCartItems, addToCart, removeFromCart };
+const orderCheckOut = async () => {
+  try {
+    const response = await api.post("/user/order-checkout");
+    return response.data.order;
+  } catch (error) {
+    console.error("Error placing order:", error);
+    throw error;
+  }
+};
+
+export { getAllCartItems, addToCart, removeFromCart, orderCheckOut };
