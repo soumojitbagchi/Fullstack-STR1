@@ -29,6 +29,5 @@ server.on('error', (err) => {
   }
   throw err;
 });
-
 process.on('SIGINT', () => server.close(() => process.exit(0)));
 process.once('SIGUSR2', () => server.close(() => process.kill(process.pid, 'SIGUSR2')));

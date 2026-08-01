@@ -100,8 +100,10 @@ const AppRoutes = () => {
           path="/search"
           element={
             <>
-              <DashboardHeader />
-              <Feed />
+              <protectedRoute>
+                <DashboardHeader />
+                <Feed />
+              </protectedRoute>
             </>
           }
         />
@@ -110,4 +112,3 @@ const AppRoutes = () => {
   );
 };
 export default AppRoutes;
-

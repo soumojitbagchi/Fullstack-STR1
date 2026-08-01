@@ -38,7 +38,7 @@ export const useAuthActions = () => {
   };
 
   const handleLogout = () => {
-    auth.logout();
+    auth.logoutUser();
   };
 
   return {
