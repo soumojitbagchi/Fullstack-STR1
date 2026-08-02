@@ -41,14 +41,35 @@ export const useAuthActions = () => {
     auth.logoutUser();
   };
 
+  const handleUpdateProfile = async ({ username, name, email }) => {
+    setIsSubmitting(true);
+    setError(null);
+    try {
+      const result = await auth.updateProfile({ username, name, email });
+      if (!result.success) {
+        setError(result.message || 'Failed to update profile');
+      }
+      return result;
+    } catch (err) {
+      const msg = err.message || 'Failed to update profile';
+      setError(msg);
+      return { success: false, message: msg };
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return {
     user: auth.user,
     loading: auth.loading,
     handleLogin,
     handleSignup,
     handleLogout,
+    handleUpdateProfile,
+    updateUser: auth.updateUser,
     isSubmitting,
     error,
     clearError: () => setError(null),
   };
 };
+

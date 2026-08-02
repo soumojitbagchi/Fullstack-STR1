@@ -33,15 +33,34 @@ export const AuthProvider = ({ children }) => {
     setUser({ id: payload.id, name: payload.user || payload.email, email: payload.email });
   };
 
+  const updateUser = ({ token, user: updatedUser }) => {
+    if (token) {
+      localStorage.setItem('token', token);
+      const payload = decodeToken(token);
+      if (payload) {
+        setUser({ id: payload.id, name: payload.user || payload.email, email: payload.email });
+        return;
+      }
+    }
+    if (updatedUser) {
+      setUser((prev) => ({
+        ...prev,
+        ...updatedUser,
+        name: updatedUser.name || updatedUser.user || prev?.name,
+      }));
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, setLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, setUser, loading, setLoading, login, updateUser, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
 
