@@ -10,16 +10,16 @@ export const chatWithAI = async (UserInput) => {
   while (true) {
     try {
       messages.push(new HumanMessage(UserInput));
-      if(UserInput.toLowerCase() === "exit") {
+      if (UserInput.toLowerCase() === "exit") {
         break;
       }
 
       const response = await model.invoke(messages);
-      messages.push(new AIMessage(response.text));
-      console.log(response.content);
+      messages.push(new AIMessage(response.content));
+      return response.content;
     } catch (error) {
       console.error("Error during AI chat:", error.stack);
+      throw error
     }
   }
 };
-chatWithAI("What is the capital of France?");

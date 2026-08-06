@@ -1,10 +1,9 @@
 import express from "express";
-import { authmiddleware } from "./middleware/auth.middleware.js";
-import { sendMessage, getMessages } from "../controllers/aiChat.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
+import AiChatController from "../controller/aiChat.controller.js";
 
 const chatRouter = express.Router();
 
-chatRouter.post("/send/:id", authmiddleware, sendMessage);
-chatRouter.get("/get/:id", authmiddleware, getMessages);
+chatRouter.get("/send", authMiddleware, AiChatController.sendMessage);
 
 export default chatRouter;

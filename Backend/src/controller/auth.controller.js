@@ -52,11 +52,11 @@ const loginController = async (req, res) => {
       $or: [{ email: email }, { user: user }],
     });
     if (!data) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Invalid credentials" });
     }
     const isPasswordMatch = await bcrypt.compare(password, data.password);
     if (!isPasswordMatch) {
-      return res.status(401).json({ message: "Invalid password" });
+      return res.status(401).json({ message: "Invalid credentials" });
     }
     const token = jwt.sign(
       {
