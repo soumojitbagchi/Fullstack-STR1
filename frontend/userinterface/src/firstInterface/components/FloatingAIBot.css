@@ -1,11 +1,16 @@
-/* ── Floating AI Bot Button ──────────────────────── */
+/* ══════════════════════════════════════════════════
+   Floating AI Bot  +  Mini Chat Panel
+   Light, plain, smooth theme
+   ══════════════════════════════════════════════════ */
+
+/* ── Floating Bot Icon ──────────────────────────── */
 .floating-ai-bot {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: 24px;
+  right: 24px;
   z-index: 50;
-  width: 56px;
-  height: 56px;
+  width: 54px;
+  height: 54px;
   border: none;
   border-radius: 50%;
   background: #111;
@@ -13,18 +18,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow:
-    0 4px 14px rgba(168, 85, 247, 0.25),
-    0 2px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   animation: fabFloat 3s ease-in-out infinite;
 }
 
 .floating-ai-bot:hover {
-  transform: scale(1.12);
-  box-shadow:
-    0 6px 24px rgba(168, 85, 247, 0.4),
-    0 4px 10px rgba(0, 0, 0, 0.5);
+  animation: none;
+  transform: scale(1.1);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.35);
 }
 
 .floating-ai-bot:active {
@@ -32,21 +34,253 @@
 }
 
 .floating-ai-bot svg {
+  width: 26px;
+  height: 26px;
+}
+
+@keyframes fabFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* ── Mini Chat Panel ────────────────────────────── */
+.minichat {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 51;
+  width: 360px;
+  height: 480px;
+  background: #fafafa;
+  border-radius: 16px;
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: minichatSlideUp 0.3s ease forwards;
+}
+
+@keyframes minichatSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ── Header ─────────────────────────────────────── */
+.minichat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  background: #f2f2f2;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.minichat-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  letter-spacing: 0.2px;
+}
+
+.minichat-close {
   width: 28px;
   height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #888;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
 }
 
-/* Gentle floating animation */
-@keyframes fabFloat {
-  0%, 100% {
+.minichat-close:hover {
+  background: #e0e0e0;
+  color: #333;
+}
+
+/* ── Messages ───────────────────────────────────── */
+.minichat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: #ddd transparent;
+}
+
+.minichat-empty {
+  margin: auto;
+  font-size: 13px;
+  color: #aaa;
+  user-select: none;
+}
+
+.minichat-msg {
+  max-width: 80%;
+  padding: 9px 13px;
+  border-radius: 14px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  animation: msgPop 0.25s ease forwards;
+}
+
+@keyframes msgPop {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.minichat-msg--user {
+  align-self: flex-end;
+  background: #e8e8e8;
+  color: #222;
+  border-bottom-right-radius: 4px;
+}
+
+.minichat-msg--ai {
+  align-self: flex-start;
+  background: #fff;
+  color: #333;
+  border: 1px solid #eee;
+  border-bottom-left-radius: 4px;
+}
+
+/* ── Typing dots ────────────────────────────────── */
+.minichat-typing {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 16px;
+}
+
+.minichat-typing span {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #bbb;
+  animation: miniDotBounce 1.2s ease-in-out infinite;
+}
+
+.minichat-typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.minichat-typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes miniDotBounce {
+  0%, 60%, 100% {
     transform: translateY(0);
+    opacity: 0.4;
   }
-  50% {
+  30% {
     transform: translateY(-6px);
+    opacity: 1;
   }
 }
 
-.floating-ai-bot:hover {
-  animation: none;
-  transform: scale(1.12);
+/* ── Input Form ─────────────────────────────────── */
+.minichat-form {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  gap: 8px;
+  border-top: 1px solid #e8e8e8;
+  background: #f8f8f8;
+}
+
+.minichat-input {
+  flex: 1;
+  padding: 9px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 999px;
+  background: #fff;
+  color: #333;
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.minichat-input::placeholder {
+  color: #bbb;
+}
+
+.minichat-input:focus {
+  border-color: #ccc;
+}
+
+.minichat-send {
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #555;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.minichat-send:hover {
+  background: #d0d0d0;
+  color: #333;
+}
+
+.minichat-send:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.minichat-send svg {
+  transform: rotate(-30deg) translateX(1px);
+}
+
+/* ── Footer — Open full chat link ───────────────── */
+.minichat-expand {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-top: 1px solid #e8e8e8;
+  background: #f2f2f2;
+  color: #888;
+  font-size: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+
+.minichat-expand:hover {
+  color: #555;
+  background: #eaeaea;
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 480px) {
+  .minichat {
+    width: calc(100vw - 24px);
+    right: 12px;
+    bottom: 12px;
+    height: 420px;
+  }
+
+  .floating-ai-bot {
+    bottom: 16px;
+    right: 16px;
+  }
 }
