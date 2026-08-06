@@ -1,0 +1,450 @@
+.aichat {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 24px;
+}
+
+/* ── Header — centered with bottom border ───────── */
+.aichat-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px 30px;
+  border-bottom: 1px solid #222;
+  margin-bottom: 0;
+  position: sticky;
+  top: 0;
+  background: #000;
+  z-index: 10;
+}
+
+.aichat-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+}
+
+.aichat-header-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.aichat-header-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+.aichat-subtitle {
+  font-size: 13px;
+  color: #666;
+  position: absolute;
+  right: 30px;
+}
+
+/* ── Messages Area ──────────────────────────────── */
+.aichat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.aichat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.aichat-messages::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+/* ── Empty State ────────────────────────────────── */
+.aichat-empty {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  opacity: 0.45;
+  user-select: none;
+  padding: 60px 0;
+}
+
+.aichat-empty-icon {
+  width: 64px;
+  height: 64px;
+  border: 2px solid #333;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aichat-empty-icon svg {
+  width: 32px;
+  height: 32px;
+  stroke: #666;
+  fill: none;
+}
+
+.aichat-empty p {
+  font-size: 15px;
+  color: #666;
+  margin: 0;
+}
+
+/* ── Single Message Bubble ──────────────────────── */
+.aichat-msg {
+  display: flex;
+  gap: 12px;
+  max-width: 75%;
+  animation: msgFadeIn 0.35s ease forwards;
+}
+
+@keyframes msgFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.aichat-msg--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.aichat-msg--ai {
+  align-self: flex-start;
+}
+
+/* ── Avatar (shared) ────────────────────────────── */
+.aichat-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 700;
+  object-fit: cover;
+}
+
+/* User avatar is now an <img> — make it circular */
+img.aichat-avatar--user {
+  border: 2px solid #a855f7;
+}
+
+.aichat-avatar--ai {
+  background: #1a1a1a;
+  border: 1px solid #333;
+  color: #a855f7;
+}
+
+.aichat-bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.aichat-bubble--user {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.aichat-bubble--ai {
+  background: #111;
+  border: 1px solid #222;
+  color: #ddd;
+  border-bottom-left-radius: 4px;
+}
+
+/* ── Typing Indicator (bouncing dots) ───────────── */
+.aichat-typing {
+  display: flex;
+  gap: 12px;
+  align-self: flex-start;
+  max-width: 75%;
+  animation: msgFadeIn 0.35s ease forwards;
+}
+
+.aichat-typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 20px;
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+}
+
+.aichat-typing-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #a855f7;
+  animation: typingBounce 1.4s ease-in-out infinite;
+}
+
+.aichat-typing-dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.aichat-typing-dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typingBounce {
+
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* ── Input Area — NO top border ─────────────────── */
+.aichat-input-area {
+  position: sticky;
+  bottom: 0;
+  background: #000;
+  padding: 16px 0 8px;
+  display: flex;
+  justify-content: center;
+  /* border-top removed */
+}
+
+.aichat-input-area form {
+  width: 66vw;
+}
+
+/* The wrapper that holds input + button, and gets the spinning border */
+.aichat-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 66%;
+  min-width: 46vw;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 999px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  overflow: visible;
+}
+
+.aichat-input-wrapper:focus-within {
+  border-color: #a855f7;
+  box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.15);
+}
+
+.aichat-input {
+  flex: 1;
+  padding: 14px 20px;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.aichat-input::placeholder {
+  color: #555;
+}
+
+/* ── Send Button (gradient, paper plane upper-right) */
+.aichat-send-btn {
+  width: 42px;
+  height: 42px;
+  margin-right: 4px;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #6366f1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s, opacity 0.2s, box-shadow 0.2s;
+  flex-shrink: 0;
+}
+
+.aichat-send-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 16px rgba(168, 85, 247, 0.4);
+}
+
+.aichat-send-btn:active {
+  transform: scale(0.92);
+}
+
+.aichat-send-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.aichat-send-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+  /* Upper-right direction like Telegram */
+  transform: rotate(-30deg) translateX(1px);
+}
+
+/* ── Loading Spinner Ring around Input ───────────── */
+.aichat-input-wrapper--loading {
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* Spinning gradient ring using pseudo-elements */
+.aichat-input-wrapper--loading::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  padding: 3px;
+  background: conic-gradient(from var(--aichat-rotate, 0deg),
+      transparent 0%,
+      #a855f7 25%,
+      #6366f1 50%,
+      transparent 75%);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: aichatSpinRing 1.8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@property --aichat-rotate {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes aichatSpinRing {
+  to {
+    --aichat-rotate: 360deg;
+  }
+}
+
+/* Fallback for browsers not supporting @property */
+@supports not (background: conic-gradient(red, blue)) {
+  .aichat-input-wrapper--loading::before {
+    border: 3px solid transparent;
+    border-top-color: #a855f7;
+    border-right-color: #6366f1;
+    animation: aichatSpinFallback 1s linear infinite;
+  }
+
+  @keyframes aichatSpinFallback {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+/* ── Loading dots inside input placeholder area ─── */
+.aichat-input-loading-dots {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 20px;
+  flex: 1;
+}
+
+.aichat-input-loading-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #666;
+  animation: inputDotPulse 1.2s ease-in-out infinite;
+}
+
+.aichat-input-loading-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.aichat-input-loading-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes inputDotPulse {
+
+  0%,
+  60%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+
+  30% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────── */
+@media (max-width: 640px) {
+  .aichat {
+    padding: 0 12px 16px;
+  }
+
+  .aichat-header {
+    padding: 16px 12px;
+  }
+
+  .aichat-header h1 {
+    font-size: 22px;
+  }
+
+  .aichat-msg {
+    max-width: 90%;
+  }
+
+  .aichat-subtitle {
+    display: none;
+  }
+
+  .aichat-input-area form {
+    width: 95vw;
+  }
+}

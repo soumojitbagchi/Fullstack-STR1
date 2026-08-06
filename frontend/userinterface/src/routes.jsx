@@ -15,6 +15,7 @@ import UserProfile from "./firstInterface/onClickingOutside/pages/UserProfile";
 import UserOrder from "./firstInterface/onClickingOutside/pages/UserOrder";
 import UserCart from "./firstInterface/onClickingOutside/pages/UserCart";
 import OrderCheckBox from "./firstInterface/onClickingOutside/pages/OrderCheckBox";
+import AIChat from "./firstInterface/components/AIChat";
 
 const AppRoutes = () => {
   return (
@@ -93,6 +94,14 @@ const AppRoutes = () => {
           element={
             <ProtectedRoute>
               <OrderCheckBox />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/ai-chat"
+          element={
+            <ProtectedRoute>
+              <AIChat />
             </ProtectedRoute>
           }
         />

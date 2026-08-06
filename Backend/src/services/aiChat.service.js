@@ -18,7 +18,7 @@ export const chatWithAI = async (UserInput) => {
       messages.push(new AIMessage(response.content));
       return response.content;
     } catch (error) {
-      console.error("Error during AI chat:", error.stack);
+      console.error("Error during AI chat:", error);
       throw error
     }
   }
