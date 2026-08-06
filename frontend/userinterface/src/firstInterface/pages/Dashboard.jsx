@@ -10,6 +10,7 @@ import { useSearch } from "../searchbar/Hooks/useSearch";
 import {useDashboard} from "../onClickingOutside/hooks/useDashboard"
 import "./Dashboard.css";
 import DashboardHeader from "./DashboardHeader";
+import FloatingAIBot from "../components/FloatingAIBot";
 
 export default function Dashboard() {
   const { user, logout } = useAuth();
@@ -214,6 +215,7 @@ export default function Dashboard() {
           })}
         </div>
       )}
+      <FloatingAIBot />
     </div>
   )
 }
